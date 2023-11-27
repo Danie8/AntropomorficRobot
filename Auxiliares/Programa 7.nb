@@ -1,0 +1,2866 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    145998,       2858]
+NotebookOptionsPosition[    145329,       2836]
+NotebookOutlinePosition[    145783,       2854]
+CellTagsIndexPosition[    145740,       2851]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Programa # Rotaci\[OAcute]n y Translaci\[OAcute]n sobre eje z", "Title",
+ CellChangeTimes->{{3.9030410226984963`*^9, 3.9030410366923885`*^9}, {
+  3.9032116467625093`*^9, 3.903211646826586*^9}, {3.903212139548807*^9, 
+  3.903212141291181*^9}, {3.9032121867854195`*^9, 3.9032121890437994`*^9}, {
+  3.903212809378371*^9, 3.903212818180357*^9}, {3.9032131301532083`*^9, 
+  3.903213133827247*^9}},ExpressionUUID->"74245859-b1df-4ebc-b707-\
+16e8e8130aac"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Creaci\[OAcute]n", " ", "del", " ", "tetraedro"}], "  ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "V\[EAcute]rtices", " ", "en", " ", "coordenadas", " ", 
+    "homog\[EAcute]neas"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"P1h", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P2h", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P3h", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P4h", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P5h", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.5", ",", "0.5", ",", 
+       SqrtBox["0.5"], ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"H", "=", 
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"1", "0", "0", "0"},
+        {"0", "1", "0", "0"},
+        {"0", "0", "1", "0"}
+       }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"T01", "=", 
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {
+         RowBox[{"Cos", "[", "\[Theta]1", "]"}], 
+         RowBox[{"-", 
+          RowBox[{"Sin", "[", "\[Theta]1", "]"}]}], "0", "0"},
+        {
+         RowBox[{"Sin", "[", "\[Theta]1", "]"}], 
+         RowBox[{"Cos", "[", "\[Theta]1", "]"}], "0", "0"},
+        {"0", "0", "1", "d1"},
+        {"0", "0", "0", "1"}
+       }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Puntos", " ", "en", " ", "coordenadas", " ", "cartesianas"}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P1", "=", 
+     RowBox[{"H", ".", "T01", ".", "P1h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P2", "=", 
+     RowBox[{"H", ".", "T01", ".", "P2h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P3", "=", 
+     RowBox[{"H", ".", "T01", ".", "P3h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P4", "=", 
+     RowBox[{"H", ".", "T01", ".", "P4h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P5", "=", 
+     RowBox[{"H", ".", "T01", ".", "P5h"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tetraedro", "=", 
+     RowBox[{"Line", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "P1", ",", "P2", ",", "P3", ",", "P4", ",", "P1", ",", "P5", ",", "P2",
+         ",", "P5", ",", "P3", ",", "P5", ",", "P4", ",", "P1"}], "}"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"aspecto", "=", 
+     RowBox[{"AspectRatio", "\[Rule]", "1"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"coordenadas", "=", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rango", "=", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"eje", "=", 
+     RowBox[{"Axes", "->", "True"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"imagen1", "=", 
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Black", ",", "Thick", ",", "tetraedro"}], "}"}], ",", "eje", 
+       ",", "rango", ",", "coordenadas", ",", "aspecto", ",", 
+       RowBox[{"ViewPoint", "\[Rule]", "Above"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Theta]1", "=", 
+     RowBox[{"360", "\[Degree]", 
+      RowBox[{"(", "\[Phi]", ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"d1", "=", 
+     RowBox[{"3", 
+      RowBox[{"(", "\[Phi]", ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tabla1", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{"imagen1", ",", 
+       RowBox[{"{", 
+        RowBox[{"\[Phi]", ",", "0", ",", "1", ",", ".01"}], "}"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"ListAnimate", "[", "tabla1", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.9030410479221077`*^9, 3.903041051628476*^9}, {
+   3.9030412565323906`*^9, 3.9030412698462534`*^9}, {3.903041742631441*^9, 
+   3.903042039561457*^9}, {3.9030422244261265`*^9, 3.9030423307325087`*^9}, {
+   3.903042365504936*^9, 3.9030424271837177`*^9}, {3.903042475837924*^9, 
+   3.903042535615839*^9}, {3.903042607669878*^9, 3.903042626109523*^9}, {
+   3.903042657759225*^9, 3.9030426666910477`*^9}, {3.9030427049195123`*^9, 
+   3.9030427790165405`*^9}, {3.9030428377330427`*^9, 3.903042840804344*^9}, {
+   3.9030428744095464`*^9, 3.903043004070017*^9}, {3.9030430421701465`*^9, 
+   3.903043102862544*^9}, 3.9030431684876523`*^9, {3.903043263711548*^9, 
+   3.90304338604285*^9}, {3.903043464657302*^9, 3.903043510135577*^9}, {
+   3.903043542277577*^9, 3.9030435491979733`*^9}, {3.9032116121268516`*^9, 
+   3.90321161309968*^9}, {3.903211698965602*^9, 3.9032117697268505`*^9}, {
+   3.903211934335495*^9, 3.9032120333247194`*^9}, {3.9032121557082944`*^9, 
+   3.9032122854891567`*^9}, {3.903212325263736*^9, 3.903212343980914*^9}, {
+   3.903212386059983*^9, 3.9032124153674517`*^9}, {3.903212446012635*^9, 
+   3.9032124560829997`*^9}, 3.9032125054438853`*^9, {3.9032128312637153`*^9, 
+   3.9032128592438574`*^9}, {3.903212892100328*^9, 3.903212934221842*^9}, {
+   3.903213039527513*^9, 3.9032130398788843`*^9}, 3.9032130950322647`*^9, {
+   3.9032131437669334`*^9, 3.9032131765208735`*^9}, 3.9032132535019197`*^9, {
+   3.9032132959134064`*^9, 3.903213349030534*^9}, 3.9032134284718723`*^9, {
+   3.9032135411879854`*^9, 3.9032135502942038`*^9}},
+ CellLabel->
+  "In[214]:=",ExpressionUUID->"447c33ec-9393-489e-b564-e3eeaa45fec6"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`i20$$ = 46, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {
+    "\"min\"" :> {$CellContext`i20$$ = 1}, 
+     "\"max\"" :> {$CellContext`i20$$ = 101}}, Typeset`bookmarkMode$$ = 
+    "Menu", Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`i20$$], 1, ""}, 1, 101, 1}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    PaneBox[
+     PanelBox[GridBox[{
+        {
+         ItemBox[
+          ItemBox[
+           TagBox[
+            StyleBox[GridBox[{
+               {"\<\"\"\>", 
+                AnimatorBox[Dynamic[$CellContext`i20$$], {1, 101, 1},
+                 AnimationRate->Automatic,
+                 AnimationRunTime->332.5400424003601,
+                 AnimationTimeIndex->2.2772277227707605`,
+                 
+                 AppearanceElements->{
+                  "ProgressSlider", "PlayPauseButton", "FasterSlowerButtons", 
+                   "DirectionButton"},
+                 AutoAction->False,
+                 DisplayAllSteps->True]}
+              },
+              AutoDelete->False,
+              
+              GridBoxAlignment->{
+               "Columns" -> {Right, {Left}}, "Rows" -> {{Baseline}}},
+              
+              GridBoxItemSize->{
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+             "ListAnimateLabel",
+             StripOnInput->False],
+            {"ControlArea", Top}],
+           Alignment->{Automatic, Inherited},
+           StripOnInput->False],
+          Background->None,
+          StripOnInput->False]},
+        {
+         ItemBox[
+          TagBox[
+           StyleBox[
+            PaneBox[
+             TagBox[
+              PaneSelectorBox[{1->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.}, {1., 0., 0.}, {1., 1., 0.}, {0., 1., 
+                   0.}, {0, 0, 0.}, {0.5, 0.5, 0.7071067811865476}, {1., 0., 
+                   0.}, {0.5, 0.5, 0.7071067811865476}, {1., 1., 0.}, {0.5, 
+                   0.5, 0.7071067811865476}, {0., 1., 0.}, {0, 0, 0.}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above,
+                ImageCache->GraphicsData["CompressedBitmap", "\<\
+eJztnfmPHMUVx4s5d+1d39f6HF/r+1gbzGl7MGCDsR0rihB2EBoDsQxKwBib
+gIXQBCGEEEIIIYQQZK1E5N/YP2V/SYKUPwAlishm36tjqnq/b7xvPevBqFqa
+2Z161Z/3requ6uqq7qqzl65f+d0fLl1/9eVLjVPXLl298urLbzVOvnFtOqh8
+nzGl9fRpmMr0/1PG4K+NxuSAHJAD7s2AMf6uNqe/2tOf8elPa/rTDPF+sPEO
+8ne96YLbUfyJJP4/4/jlSReHt5INm4jDeJ9/2P9Hrb3heMys8He1YTob6ePf
+ZRuffk924U26YDZV+LvcjHimauO1fZwih9NSanU8TrpU81bj6OPNZvMWfR2P
+9jH1cYeiv22315TXX7M02mvq8uXL9LGgb+lr2s2FCxcokH8di7k1n+ZWxCZm
+nc2VGNkaHR3l1Hxjbfx7OpzoFC8Bh8xkgQts9lCsiTNnzvg96a/NoK9thNhA
+EWcK5oNKu3DG80G1qa95OP2IOcz/yqU2dky56Hw4F2OdoxKOc8ke57aJtoo7
+JpHHole785cuL2KDP3l98mg7GvnnImSzv5x4KAEYe/kCGMqyl6OAXZbYnwND
+RceuSOzPgKGqY1cl9qfAUNOxaxL7E2Co69h1if0xMAzo2AMS+yNgGNSxB1OE
+rV64kqDwPwEHC3QOFqQIrspKwUEbOFioc7BQyh3EHtKxhyT2+8AwrGMPS+z3
+gGGRjr1IYt8EhsU69mKJ/Q4wLNGxl0jst4FhqY69VGJfB4ZlOvYyiX0NGJbr
+2Msl9lVgWKFjr5DYrwPDSh17ZYqwBZ//o/DXgINVOgerJPGIvVrHXi2xrwDD
+Gh17jcS+DAwjOvaIxH4FGNbq2Gsl9kvAsE7HXiexW8CwXsdeL7FfBIYNOvYG
+if0CMGzUsTdK7IvAsEnH3pQiCoXzOeCgoXPQAIi/2bDG8PBw+/Dhw82RkRHf
+TqV9fRvex0v23axzv1l0XyfXdIdDMiiAflMc/o1cb9G53gIQ33NYjVx4DP3v
+3SKvW3Vet4peK5TPlGB/W4e8bdN52yZ6C7emfHS/B/G261xtB4i/cli4uYyz
+1NnS+KOzcpkWBJTEv1i/9NufwD5TnS2Nv0OX1B0AcYvD6j5Xjdt8HM7lW2C/
+nTrXO1NEJxu+swZfWHgrgbA/Aw27dBp2AQRXR08Cw24de7fEPgEMe3Rsd3tG
+h4LCeZeKvZHiw+M325AbbBnbMeM7Z5rOPFNbE2jbOydtcUkxFTp3C4fPNmC5
+98V34pHOEvdlhT62mRKPAYn7dBIH0zDOMttEqif9gcZeVHzfltx78hgw7Ndp
+4pvWEv9M88k1akN/VRBSIp1ip8sjwHBgDpJMxV9C6EP/O0GUM0GUv6aaqC9S
+lPYQMBzUSXN34HTkwi5OV9NEvZpIV6Evifethu6BMSBuTCduqCOOKlE+91ek
+mSaKK3RGca1YCeIOplYWd0gnzhbPanyFpg/bufotnH5LU+GtIJwLqtgHdQgY
+Ds9FKashtVxKuWXhDjQVy7aXWQJhojiUjffrxNlrdZ2yIww5GFt1hONb6Ojq
++N8PDA/MxT8fFvLJQw4lMJwgatgLDEd0GriNU6JoYucPugg+qPPyoMTeCQwP
+6dg2eiUubeGOBLUCH9bhH5ako5beIzo2qt+ZjW4GHtWxHwUI2/VRbRt7wvvr
+JLPestnoT0SytYzvnauOo11Qt9tjOpXoomur2boffWmZzqgUuW+Q9U2OU/Oj
+gWRvO+Xk0/b7VYoI2y7hAhc21Fd7VJeIowDhuvaaJrrA+gawE8pNFN8bZ6Kh
+wk7L4EZKaUgU1Cl8TJeIQpOMd+EOdx7+4Eoy8tz0WstBK6eEcxgNo3JvaYl2
+86NGJmqkoc744zr9NnpSDZC92tHsW8/2bB4Icq92BLW9IJdU8hoy/mbYA8lt
+6uQ2AcKWp7o/of3WMtFl24lF181E7I3uLHZfGGNhDY/rkvE4QNie/povfL7a
+8DcIb6pSIGKQ+BM68egmjq+CfD5bOS2fWdeCoZyKNR2x1bh6DHsipU/olD4B
+EK7Mt01UjvyYhIlKnsvbpIV6IyQGVX9P6sSh+2yPNdGdV9l+N0y02QEDfgrE
+xyM7JSqcCH4Q53YsNL78lC4pNnpSiZDNHUHy5k9DW18UFLzB3zxw70/VUHD/
+OEsGuuM6qUvFSYD4sOM+bB+AeKd0rk4BBBcKNPj8tI79tMRGA/LP6NjPSGx0
+Ep3WsW15GKB4bVN4Asp0ekOYNwXcPatzZ+uGIYrn68aWKTxIFbn1d7P/A57P
+zMUzeiRrRhdM4uYn4PqszrVrlTfMHTzZhXqC/gvCzs1Jmr9u2bMK3NWhh8RQ
+4f8PCPvVrCSFTmb+xbHEh85Qh8q/7c7BK22z8xwQHc+6R9d451UWkTy1FoWF
+XtNVHZ3zFrbShnGZLWhBYaE7hrbzuhPIFquaz6KWQU/kwTHtxIMLIyX+IPuw
+eEig52GuZ8ePl8Xxbqt5TjlVphyaNMkjhjl7OtlD2RLa/NGTkmnkm0Dru3eu
+wTUOk9pQfpQy3ffHHrnnSwIqNj1wcD5jMzZjMzZjMzZjMzZjMzZjfxHY9JG2
+c/eC5IzN2IzN2IzN2IzN2IzN2IzN2IydJTYdMz/bU3Y6Kt5b9r2VyxmbsRmb
+sRmbsRmbsRmbsXcPG00xRCZ+KXX7fLriV+c9ht6F5TlxShRzYH78RvMWhUd3
+bRi//edfqAnvU6Cn43ong5IfEPbBRn6hLDyV6GT41/fgA4q9k5PMNeKfszS3
+mVe0Oj+SrHt+JTp+3tg/OWqi17ecqrbLqHlX5SYyoPMnTHwjTmQwR13uCVP/
+aDg/GLpxKoSF7cIc9NsZVyhnSTolIXq9tNww0flX7p6EMBBco+/TUjq2TAVy
+2J7XCXf1hX8M31P4Rcwo71vB0F347fO+Z5rricnYVz7CeeMyHb30l7yYptJe
+7ZwoQb+fms5EJ1S5V2ksh1oj0h9OLNp4spb4LcFQw6pTVwOpK7xVHL9bciep
+c5lGKQspKXfCwlwSdiqaGu3rjySlzb/IMduLyLs2L5kVl3z/cgglpTBlRfTc
+eHir2787clGX2GiC6nGTvloxlxRwPvlU+Efbk4NWeB82lj7Z2SVEp015/Gbb
+TurItueumPt2Log6kmyc7P7oLnfXPcTmKtRtk3ynZ49ecqW75AVdJJf7JLna
+XfIAlsxOK32S7Cf/FiTXukiu9klyvbtkm5PViYK5ZUJy7r7kge6SbRGrFs0s
+ud4nyXbynLokeTxELLyQ1K8s9lPkF/RORjrHY539ylc3B0as0+ubiPUN9Ekf
+Xwpc22jSRJfjwZ9fhvmTsa8ZNssTL+jsc4Eu1ou+UMQFOtHb3zpzRj1udVpl
+3a9a/boyzbhatjm0u+R+XUyFC3zLmFleaPvVysKSB7tL7lfDsIIlM3Vhd8n9
+an67u3Ty5X3DSfas/AFJvjF9vFuzx7vp5aP+DHuDLjZzJqNk323trUgP1GBv
+kGdceeKa/K5prgN/ri8i1teLXheVrhrwtxzoutv5xX1wayZN6I27a54Lkwps
+ou/fzqu/JKN70Es9W/c8NUOjYcLyAL128PMYlsvYexmbH5zM2IzN2IzN2IzN
+2IzN2IzN2IzN2Lne8+XJVzI2YzM2YzM2YzM2YzM2YzM2Y3+ZWDiGSPsEw4/W
+HH7Pnp2OIVqlvVruJCT9XIq9w/VbAvYsQPRgpZozAPETCFOuzfMsQEyBsDM6
+7GkJWwIG5RpK87kc1HwuYzWfy2+hVcSYjdazUy4b9pTEHgIG5epnaDk6ZqMF
+bpXrw6F1+Ji9BBiUy+idkNjLgEG5fiBappHZK4DhhI7dlNirgEG5vORxib0G
+GJo6NlqDntlrgeG4jn1UYq8HBuVCrWjJXPtEGjAc1bHRosHMbgCDcqnf+Vzs
+eD4XaUYr3TN7FBiUi0vP57rYRyR2D9bzfkBi7wWGIzr2/RK7ByuuH5bYB4FB
+uZr8IYmNDId17DGJjTLrkI6Nks5sdAKN6dgHJDYqVAd1bHQ6MBtVNAd07H0S
+G1W++3VsVESYjS5I+3TsPRK7CQx7dWxUbTAbNVz26Ni7JDZqzO3WsVFVymzU
+wN2lY++Q2KjRv3NW7HTcE12/2AG6G9qhE79dYqP7wlEdW9SN7pC369hbJfZ5
+YNimY6O2CLN/DQxbdezNEvs3wLBFx25I7OeAYbOOvUliPw8MDR0btVmZfREY
+NunYGyT2C8CwUcdG7XhmvwgMG3TsdRK7BQzrdWx0b8Psl4BhnY49IrFfAYa1
+Oja632P2ZWAY0bFXS+wrwLBGx0b3wMx+DRhW69grJfbvgWGVjo36BZj9OjCs
+1LGXS+yrwLBCx0Z9Jcy+BgzLdeylEvs6MCzTsVH/EbPfBoalOvZiif0OMCzR
+sVGfGrNvAsNiHXtYYr8HDIt0bNTPyOz3gWFYx14osdvAMKRjo75XZn8ADAt1
+7EGJ/SEwLNCxUX80sz8ChkEduy6xPwaGAR0b9dEz+xNgqOvYVYn9KTDUdGw0
+bsHsz4ChqmOXJfbnwFCR2WAiNvpwHDQRGxrnYb9fAENZ9mv7GeoURru3jW1Z
+ke8J799mdz3xb+ychqnvL4Hv0u1885vL4c1hHz0O87NsRP5jF+z6KxsncU1p
+cG6PJR4phY2CRwqbTD1WvceZKf3aRogNIYXOl+uNa7ucjbgViubnXQ0p+Mba
+PNKP6s5U3i4oJ9UTqYdw80wUM0W/vmVtYbrXWKk7B/wb3T7v/RvlnFN8DjLo
+Fn0dj/estdxeLZNOIcjp+mFGAiY9lO3/Sux+t1aIXZiagvf5u/1/rJMB4VV0
+N6dCW9pnKnxtzAE5IAfcqwHmvv8DYnaL/w==\
+\>"]], 2->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.03}, {0.9980267284282716, 
+                   0.06279051952931337, 0.03}, {0.9352362088989582, 
+                   1.060817247957585, 0.03}, {-0.06279051952931337, 
+                   0.9980267284282716, 0.03}, {0, 0, 0.03}, {
+                   0.4676181044494791, 0.5304086239787925, 
+                   0.7371067811865476}, {0.9980267284282716, 
+                   0.06279051952931337, 0.03}, {0.4676181044494791, 
+                   0.5304086239787925, 0.7371067811865476}, {
+                   0.9352362088989582, 1.060817247957585, 0.03}, {
+                   0.4676181044494791, 0.5304086239787925, 
+                   0.7371067811865476}, {-0.06279051952931337, 
+                   0.9980267284282716, 0.03}, {0, 0, 0.03}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 3->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.06}, {0.9921147013144779, 
+                   0.12533323356430426`, 0.06}, {0.8667814677501736, 
+                   1.1174479348787822`, 0.06}, {-0.12533323356430426`, 
+                   0.9921147013144779, 0.06}, {0, 0, 0.06}, {
+                   0.4333907338750868, 0.5587239674393911, 
+                   0.7671067811865475}, {0.9921147013144779, 
+                   0.12533323356430426`, 0.06}, {0.4333907338750868, 
+                   0.5587239674393911, 0.7671067811865475}, {
+                   0.8667814677501736, 1.1174479348787822`, 0.06}, {
+                   0.4333907338750868, 0.5587239674393911, 
+                   0.7671067811865475}, {-0.12533323356430426`, 
+                   0.9921147013144779, 0.06}, {0, 0, 0.06}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 4->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.09}, {0.9822872507286887, 
+                   0.1873813145857246, 0.09}, {0.7949059361429641, 
+                   1.1696685653144132`, 0.09}, {-0.1873813145857246, 
+                   0.9822872507286887, 0.09}, {0, 0, 0.09}, {
+                   0.39745296807148206`, 0.5848342826572066, 
+                   0.7971067811865475}, {0.9822872507286887, 
+                   0.1873813145857246, 0.09}, {0.39745296807148206`, 
+                   0.5848342826572066, 0.7971067811865475}, {
+                   0.7949059361429641, 1.1696685653144132`, 0.09}, {
+                   0.39745296807148206`, 0.5848342826572066, 
+                   0.7971067811865475}, {-0.1873813145857246, 
+                   0.9822872507286887, 0.09}, {0, 0, 0.09}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 5->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.12}, {0.9685831611286311, 
+                   0.2486898871648548, 0.12}, {0.7198932739637762, 
+                   1.217273048293486, 0.12}, {-0.2486898871648548, 
+                   0.9685831611286311, 0.12}, {0, 0, 0.12}, {
+                   0.3599466369818881, 0.608636524146743, 
+                   0.8271067811865476}, {0.9685831611286311, 
+                   0.2486898871648548, 0.12}, {0.3599466369818881, 
+                   0.608636524146743, 0.8271067811865476}, {
+                   0.7198932739637762, 1.217273048293486, 0.12}, {
+                   0.3599466369818881, 0.608636524146743, 
+                   0.8271067811865476}, {-0.2486898871648548, 
+                   0.9685831611286311, 0.12}, {0, 0, 0.12}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 6->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.15000000000000002`}, {0.9510565162951535,
+                    0.3090169943749474, 0.15000000000000002`}, {
+                   0.6420395219202062, 1.2600735106701009`, 
+                   0.15000000000000002`}, {-0.3090169943749474, 
+                   0.9510565162951535, 0.15000000000000002`}, {
+                   0, 0, 0.15000000000000002`}, {0.3210197609601031, 
+                   0.6300367553350504, 0.8571067811865476}, {
+                   0.9510565162951535, 0.3090169943749474, 
+                   0.15000000000000002`}, {0.3210197609601031, 
+                   0.6300367553350504, 0.8571067811865476}, {
+                   0.6420395219202062, 1.2600735106701009`, 
+                   0.15000000000000002`}, {0.3210197609601031, 
+                   0.6300367553350504, 
+                   0.8571067811865476}, {-0.3090169943749474, 
+                   0.9510565162951535, 0.15000000000000002`}, {
+                   0, 0, 0.15000000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 7->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.18}, {0.9297764858882515, 
+                   0.3681245526846779, 0.18}, {0.5616519332035735, 
+                   1.2979010385729293`, 0.18}, {-0.3681245526846779, 
+                   0.9297764858882515, 0.18}, {0, 0, 0.18}, {
+                   0.28082596660178677`, 0.6489505192864646, 
+                   0.8871067811865476}, {0.9297764858882515, 
+                   0.3681245526846779, 0.18}, {0.28082596660178677`, 
+                   0.6489505192864646, 0.8871067811865476}, {
+                   0.5616519332035735, 1.2979010385729293`, 0.18}, {
+                   0.28082596660178677`, 0.6489505192864646, 
+                   0.8871067811865476}, {-0.3681245526846779, 
+                   0.9297764858882515, 0.18}, {0, 0, 0.18}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 8->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.21000000000000002`}, {0.9048270524660195,
+                    0.4257792915650727, 0.21000000000000002`}, {
+                   0.47904776090094675`, 1.3306063440310922`, 
+                   0.21000000000000002`}, {-0.4257792915650727, 
+                   0.9048270524660195, 0.21000000000000002`}, {
+                   0, 0, 0.21000000000000002`}, {0.23952388045047338`, 
+                   0.6653031720155461, 0.9171067811865476}, {
+                   0.9048270524660195, 0.4257792915650727, 
+                   0.21000000000000002`}, {0.23952388045047338`, 
+                   0.6653031720155461, 0.9171067811865476}, {
+                   0.47904776090094675`, 1.3306063440310922`, 
+                   0.21000000000000002`}, {0.23952388045047338`, 
+                   0.6653031720155461, 
+                   0.9171067811865476}, {-0.4257792915650727, 
+                   0.9048270524660195, 0.21000000000000002`}, {
+                   0, 0, 0.21000000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 9->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.24}, {0.8763066800438636, 
+                   0.4817536741017153, 0.24}, {0.39455300594214826`, 
+                   1.358060354145579, 0.24}, {-0.4817536741017153, 
+                   0.8763066800438636, 0.24}, {0, 0, 0.24}, {
+                   0.19727650297107413`, 0.6790301770727895, 
+                   0.9471067811865476}, {0.8763066800438636, 
+                   0.4817536741017153, 0.24}, {0.19727650297107413`, 
+                   0.6790301770727895, 0.9471067811865476}, {
+                   0.39455300594214826`, 1.358060354145579, 0.24}, {
+                   0.19727650297107413`, 0.6790301770727895, 
+                   0.9471067811865476}, {-0.4817536741017153, 
+                   0.8763066800438636, 0.24}, {0, 0, 0.24}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 10->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.27}, {0.8443279255020151, 
+                   0.5358267949789967, 0.27}, {0.3085011305230184, 
+                   1.3801547204810118`, 0.27}, {-0.5358267949789967, 
+                   0.8443279255020151, 0.27}, {0, 0, 0.27}, {
+                   0.1542505652615092, 0.6900773602405059, 
+                   0.9771067811865476}, {0.8443279255020151, 
+                   0.5358267949789967, 0.27}, {0.1542505652615092, 
+                   0.6900773602405059, 0.9771067811865476}, {
+                   0.3085011305230184, 1.3801547204810118`, 0.27}, {
+                   0.1542505652615092, 0.6900773602405059, 
+                   0.9771067811865476}, {-0.5358267949789967, 
+                   0.8443279255020151, 0.27}, {0, 0, 0.27}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 11->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.30000000000000004`}, {0.8090169943749475,
+                    0.5877852522924731, 0.30000000000000004`}, {
+                   0.22123174208247431`, 1.3968022466674206`, 
+                   0.30000000000000004`}, {-0.5877852522924731, 
+                   0.8090169943749475, 0.30000000000000004`}, {
+                   0, 0, 0.30000000000000004`}, {0.11061587104123716`, 
+                   0.6984011233337103, 1.0071067811865477`}, {
+                   0.8090169943749475, 0.5877852522924731, 
+                   0.30000000000000004`}, {0.11061587104123716`, 
+                   0.6984011233337103, 1.0071067811865477`}, {
+                   0.22123174208247431`, 1.3968022466674206`, 
+                   0.30000000000000004`}, {0.11061587104123716`, 
+                   0.6984011233337103, 
+                   1.0071067811865477`}, {-0.5877852522924731, 
+                   0.8090169943749475, 0.30000000000000004`}, {
+                   0, 0, 0.30000000000000004`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 12->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.33}, {0.7705132427757891, 
+                   0.6374239897486897, 0.33}, {0.1330892530270994, 
+                   1.4079372325244788`, 0.33}, {-0.6374239897486897, 
+                   0.7705132427757891, 0.33}, {0, 0, 0.33}, {
+                   0.0665446265135497, 0.7039686162622394, 
+                   1.0371067811865475`}, {0.7705132427757891, 
+                   0.6374239897486897, 0.33}, {0.0665446265135497, 
+                   0.7039686162622394, 1.0371067811865475`}, {
+                   0.1330892530270994, 1.4079372325244788`, 0.33}, {
+                   0.0665446265135497, 0.7039686162622394, 
+                   1.0371067811865475`}, {-0.6374239897486897, 
+                   0.7705132427757891, 0.33}, {0, 0, 0.33}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 13->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.36}, {0.7289686274214116, 
+                   0.6845471059286886, 0.36}, {0.04442152149272294, 
+                   1.4135157333501, 0.36}, {-0.6845471059286886, 
+                   0.7289686274214116, 0.36}, {0, 0, 0.36}, {
+                   0.02221076074636147, 0.70675786667505, 
+                   1.0671067811865476`}, {0.7289686274214116, 
+                   0.6845471059286886, 0.36}, {0.02221076074636147, 
+                   0.70675786667505, 1.0671067811865476`}, {
+                   0.04442152149272294, 1.4135157333501, 0.36}, {
+                   0.02221076074636147, 0.70675786667505, 
+                   1.0671067811865476`}, {-0.6845471059286886, 
+                   0.7289686274214116, 0.36}, {0, 0, 0.36}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 14->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.39}, {0.6845471059286886, 
+                   0.7289686274214116, 0.39}, {-0.04442152149272294, 
+                   1.4135157333501, 0.39}, {-0.7289686274214116, 
+                   0.6845471059286886, 0.39}, {
+                   0, 0, 0.39}, {-0.02221076074636147, 0.70675786667505, 
+                   1.0971067811865476`}, {0.6845471059286886, 
+                   0.7289686274214116, 0.39}, {-0.02221076074636147, 
+                   0.70675786667505, 
+                   1.0971067811865476`}, {-0.04442152149272294, 
+                   1.4135157333501, 0.39}, {-0.02221076074636147, 
+                   0.70675786667505, 
+                   1.0971067811865476`}, {-0.7289686274214116, 
+                   0.6845471059286886, 0.39}, {0, 0, 0.39}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 15->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.42000000000000004`}, {0.6374239897486896,
+                    0.7705132427757893, 
+                   0.42000000000000004`}, {-0.13308925302709962`, 
+                   1.4079372325244788`, 
+                   0.42000000000000004`}, {-0.7705132427757893, 
+                   0.6374239897486896, 0.42000000000000004`}, {
+                   0, 0, 0.42000000000000004`}, {-0.06654462651354981, 
+                   0.7039686162622394, 1.1271067811865476`}, {
+                   0.6374239897486896, 0.7705132427757893, 
+                   0.42000000000000004`}, {-0.06654462651354981, 
+                   0.7039686162622394, 
+                   1.1271067811865476`}, {-0.13308925302709962`, 
+                   1.4079372325244788`, 
+                   0.42000000000000004`}, {-0.06654462651354981, 
+                   0.7039686162622394, 
+                   1.1271067811865476`}, {-0.7705132427757893, 
+                   0.6374239897486896, 0.42000000000000004`}, {
+                   0, 0, 0.42000000000000004`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 16->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.44999999999999996`}, {0.5877852522924731,
+                    0.8090169943749475, 
+                   0.44999999999999996`}, {-0.22123174208247431`, 
+                   1.3968022466674206`, 
+                   0.44999999999999996`}, {-0.8090169943749475, 
+                   0.5877852522924731, 0.44999999999999996`}, {
+                   0, 0, 0.44999999999999996`}, {-0.11061587104123716`, 
+                   0.6984011233337103, 1.1571067811865476`}, {
+                   0.5877852522924731, 0.8090169943749475, 
+                   0.44999999999999996`}, {-0.11061587104123716`, 
+                   0.6984011233337103, 
+                   1.1571067811865476`}, {-0.22123174208247431`, 
+                   1.3968022466674206`, 
+                   0.44999999999999996`}, {-0.11061587104123716`, 
+                   0.6984011233337103, 
+                   1.1571067811865476`}, {-0.8090169943749475, 
+                   0.5877852522924731, 0.44999999999999996`}, {
+                   0, 0, 0.44999999999999996`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 17->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.48}, {0.5358267949789965, 
+                   0.8443279255020151, 0.48}, {-0.30850113052301853`, 
+                   1.3801547204810116`, 0.48}, {-0.8443279255020151, 
+                   0.5358267949789965, 0.48}, {
+                   0, 0, 0.48}, {-0.15425056526150926`, 0.6900773602405058, 
+                   1.1871067811865474`}, {0.5358267949789965, 
+                   0.8443279255020151, 0.48}, {-0.15425056526150926`, 
+                   0.6900773602405058, 
+                   1.1871067811865474`}, {-0.30850113052301853`, 
+                   1.3801547204810116`, 0.48}, {-0.15425056526150926`, 
+                   0.6900773602405058, 
+                   1.1871067811865474`}, {-0.8443279255020151, 
+                   0.5358267949789965, 0.48}, {0, 0, 0.48}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 18->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.51}, {0.48175367410171516`, 
+                   0.8763066800438637, 0.51}, {-0.39455300594214854`, 
+                   1.358060354145579, 0.51}, {-0.8763066800438637, 
+                   0.48175367410171516`, 0.51}, {
+                   0, 0, 0.51}, {-0.19727650297107427`, 0.6790301770727895, 
+                   1.2171067811865477`}, {0.48175367410171516`, 
+                   0.8763066800438637, 0.51}, {-0.19727650297107427`, 
+                   0.6790301770727895, 
+                   1.2171067811865477`}, {-0.39455300594214854`, 
+                   1.358060354145579, 0.51}, {-0.19727650297107427`, 
+                   0.6790301770727895, 
+                   1.2171067811865477`}, {-0.8763066800438637, 
+                   0.48175367410171516`, 0.51}, {0, 0, 0.51}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 19->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.54}, {0.42577929156507266`, 
+                   0.9048270524660196, 0.54}, {-0.4790477609009469, 
+                   1.3306063440310922`, 0.54}, {-0.9048270524660196, 
+                   0.42577929156507266`, 0.54}, {
+                   0, 0, 0.54}, {-0.23952388045047346`, 0.6653031720155461, 
+                   1.2471067811865475`}, {0.42577929156507266`, 
+                   0.9048270524660196, 0.54}, {-0.23952388045047346`, 
+                   0.6653031720155461, 
+                   1.2471067811865475`}, {-0.4790477609009469, 
+                   1.3306063440310922`, 0.54}, {-0.23952388045047346`, 
+                   0.6653031720155461, 
+                   1.2471067811865475`}, {-0.9048270524660196, 
+                   0.42577929156507266`, 0.54}, {0, 0, 0.54}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 20->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.5700000000000001}, {0.36812455268467786`,
+                    0.9297764858882515, 
+                   0.5700000000000001}, {-0.5616519332035737, 
+                   1.2979010385729293`, 
+                   0.5700000000000001}, {-0.9297764858882515, 
+                   0.36812455268467786`, 0.5700000000000001}, {
+                   0, 0, 0.5700000000000001}, {-0.2808259666017868, 
+                   0.6489505192864646, 1.2771067811865477`}, {
+                   0.36812455268467786`, 0.9297764858882515, 
+                   0.5700000000000001}, {-0.2808259666017868, 
+                   0.6489505192864646, 
+                   1.2771067811865477`}, {-0.5616519332035737, 
+                   1.2979010385729293`, 
+                   0.5700000000000001}, {-0.2808259666017868, 
+                   0.6489505192864646, 
+                   1.2771067811865477`}, {-0.9297764858882515, 
+                   0.36812455268467786`, 0.5700000000000001}, {
+                   0, 0, 0.5700000000000001}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 21->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.6000000000000001}, {0.30901699437494745`,
+                    0.9510565162951535, 
+                   0.6000000000000001}, {-0.6420395219202061, 
+                   1.260073510670101, 
+                   0.6000000000000001}, {-0.9510565162951535, 
+                   0.30901699437494745`, 0.6000000000000001}, {
+                   0, 0, 0.6000000000000001}, {-0.32101976096010304`, 
+                   0.6300367553350505, 1.3071067811865476`}, {
+                   0.30901699437494745`, 0.9510565162951535, 
+                   0.6000000000000001}, {-0.32101976096010304`, 
+                   0.6300367553350505, 
+                   1.3071067811865476`}, {-0.6420395219202061, 
+                   1.260073510670101, 
+                   0.6000000000000001}, {-0.32101976096010304`, 
+                   0.6300367553350505, 
+                   1.3071067811865476`}, {-0.9510565162951535, 
+                   0.30901699437494745`, 0.6000000000000001}, {
+                   0, 0, 0.6000000000000001}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 22->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.63}, {0.24868988716485496`, 
+                   0.9685831611286311, 0.63}, {-0.7198932739637761, 
+                   1.2172730482934861`, 0.63}, {-0.9685831611286311, 
+                   0.24868988716485496`, 0.63}, {
+                   0, 0, 0.63}, {-0.35994663698188806`, 0.6086365241467431, 
+                   1.3371067811865476`}, {0.24868988716485496`, 
+                   0.9685831611286311, 0.63}, {-0.35994663698188806`, 
+                   0.6086365241467431, 
+                   1.3371067811865476`}, {-0.7198932739637761, 
+                   1.2172730482934861`, 0.63}, {-0.35994663698188806`, 
+                   0.6086365241467431, 
+                   1.3371067811865476`}, {-0.9685831611286311, 
+                   0.24868988716485496`, 0.63}, {0, 0, 0.63}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 23->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.66}, {0.18738131458572452`, 
+                   0.9822872507286887, 0.66}, {-0.7949059361429642, 
+                   1.1696685653144132`, 0.66}, {-0.9822872507286887, 
+                   0.18738131458572452`, 0.66}, {
+                   0, 0, 0.66}, {-0.3974529680714821, 0.5848342826572066, 
+                   1.3671067811865476`}, {0.18738131458572452`, 
+                   0.9822872507286887, 0.66}, {-0.3974529680714821, 
+                   0.5848342826572066, 
+                   1.3671067811865476`}, {-0.7949059361429642, 
+                   1.1696685653144132`, 0.66}, {-0.3974529680714821, 
+                   0.5848342826572066, 
+                   1.3671067811865476`}, {-0.9822872507286887, 
+                   0.18738131458572452`, 0.66}, {0, 0, 0.66}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 24->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.6900000000000001}, {0.12533323356430426`,
+                    0.9921147013144779, 
+                   0.6900000000000001}, {-0.8667814677501736, 
+                   1.1174479348787822`, 
+                   0.6900000000000001}, {-0.9921147013144779, 
+                   0.12533323356430426`, 0.6900000000000001}, {
+                   0, 0, 0.6900000000000001}, {-0.4333907338750868, 
+                   0.5587239674393911, 1.3971067811865476`}, {
+                   0.12533323356430426`, 0.9921147013144779, 
+                   0.6900000000000001}, {-0.4333907338750868, 
+                   0.5587239674393911, 
+                   1.3971067811865476`}, {-0.8667814677501736, 
+                   1.1174479348787822`, 
+                   0.6900000000000001}, {-0.4333907338750868, 
+                   0.5587239674393911, 
+                   1.3971067811865476`}, {-0.9921147013144779, 
+                   0.12533323356430426`, 0.6900000000000001}, {
+                   0, 0, 0.6900000000000001}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 25->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.72}, {0.06279051952931353, 
+                   0.9980267284282716, 0.72}, {-0.9352362088989581, 
+                   1.060817247957585, 0.72}, {-0.9980267284282716, 
+                   0.06279051952931353, 0.72}, {
+                   0, 0, 0.72}, {-0.46761810444947904`, 0.5304086239787925, 
+                   1.4271067811865477`}, {0.06279051952931353, 
+                   0.9980267284282716, 0.72}, {-0.46761810444947904`, 
+                   0.5304086239787925, 
+                   1.4271067811865477`}, {-0.9352362088989581, 
+                   1.060817247957585, 0.72}, {-0.46761810444947904`, 
+                   0.5304086239787925, 
+                   1.4271067811865477`}, {-0.9980267284282716, 
+                   0.06279051952931353, 0.72}, {0, 0, 0.72}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 26->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.75}, {6.123233995736766*^-17, 1., 
+                   0.75}, {-0.9999999999999999, 1., 0.75}, {-1., 
+                   6.123233995736766*^-17, 0.75}, {
+                   0, 0, 0.75}, {-0.49999999999999994`, 0.5, 
+                   1.4571067811865475`}, {6.123233995736766*^-17, 1., 
+                   0.75}, {-0.49999999999999994`, 0.5, 
+                   1.4571067811865475`}, {-0.9999999999999999, 1., 
+                   0.75}, {-0.49999999999999994`, 0.5, 
+                   1.4571067811865475`}, {-1., 6.123233995736766*^-17, 
+                   0.75}, {0, 0, 0.75}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 27->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.78}, {-0.0627905195293134, 
+                   0.9980267284282716, 0.78}, {-1.060817247957585, 
+                   0.9352362088989582, 
+                   0.78}, {-0.9980267284282716, -0.0627905195293134, 0.78}, {
+                   0, 0, 0.78}, {-0.5304086239787925, 0.4676181044494791, 
+                   1.4871067811865477`}, {-0.0627905195293134, 
+                   0.9980267284282716, 0.78}, {-0.5304086239787925, 
+                   0.4676181044494791, 
+                   1.4871067811865477`}, {-1.060817247957585, 
+                   0.9352362088989582, 0.78}, {-0.5304086239787925, 
+                   0.4676181044494791, 
+                   1.4871067811865477`}, {-0.9980267284282716, \
+-0.0627905195293134, 0.78}, {0, 0, 0.78}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 28->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.81}, {-0.12533323356430437`, 
+                   0.9921147013144778, 0.81}, {-1.1174479348787822`, 
+                   0.8667814677501734, 
+                   0.81}, {-0.9921147013144778, -0.12533323356430437`, 
+                   0.81}, {0, 0, 0.81}, {-0.5587239674393911, 
+                   0.4333907338750867, 
+                   1.5171067811865475`}, {-0.12533323356430437`, 
+                   0.9921147013144778, 0.81}, {-0.5587239674393911, 
+                   0.4333907338750867, 
+                   1.5171067811865475`}, {-1.1174479348787822`, 
+                   0.8667814677501734, 0.81}, {-0.5587239674393911, 
+                   0.4333907338750867, 
+                   1.5171067811865475`}, {-0.9921147013144778, \
+-0.12533323356430437`, 0.81}, {0, 0, 0.81}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 29->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 0.8400000000000001}, {-0.18738131458572482`, 
+                   0.9822872507286886, 
+                   0.8400000000000001}, {-1.1696685653144134`, 
+                   0.7949059361429638, 
+                   0.8400000000000001}, {-0.9822872507286886, \
+-0.18738131458572482`, 0.8400000000000001}, {
+                   0, 0, 0.8400000000000001}, {-0.5848342826572067, 
+                   0.3974529680714819, 
+                   1.5471067811865478`}, {-0.18738131458572482`, 
+                   0.9822872507286886, 
+                   0.8400000000000001}, {-0.5848342826572067, 
+                   0.3974529680714819, 
+                   1.5471067811865478`}, {-1.1696685653144134`, 
+                   0.7949059361429638, 
+                   0.8400000000000001}, {-0.5848342826572067, 
+                   0.3974529680714819, 
+                   1.5471067811865478`}, {-0.9822872507286886, \
+-0.18738131458572482`, 0.8400000000000001}, {0, 0, 0.8400000000000001}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 30->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 0.8699999999999999}, {-0.24868988716485463`, 
+                   0.9685831611286312, 
+                   0.8699999999999999}, {-1.2172730482934857`, 
+                   0.7198932739637766, 
+                   0.8699999999999999}, {-0.9685831611286312, \
+-0.24868988716485463`, 0.8699999999999999}, {
+                   0, 0, 0.8699999999999999}, {-0.6086365241467429, 
+                   0.3599466369818883, 
+                   1.5771067811865476`}, {-0.24868988716485463`, 
+                   0.9685831611286312, 
+                   0.8699999999999999}, {-0.6086365241467429, 
+                   0.3599466369818883, 
+                   1.5771067811865476`}, {-1.2172730482934857`, 
+                   0.7198932739637766, 
+                   0.8699999999999999}, {-0.6086365241467429, 
+                   0.3599466369818883, 
+                   1.5771067811865476`}, {-0.9685831611286312, \
+-0.24868988716485463`, 0.8699999999999999}, {0, 0, 0.8699999999999999}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 31->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 0.8999999999999999}, {-0.30901699437494734`, 
+                   0.9510565162951536, 
+                   0.8999999999999999}, {-1.260073510670101, 
+                   0.6420395219202063, 
+                   0.8999999999999999}, {-0.9510565162951536, \
+-0.30901699437494734`, 0.8999999999999999}, {
+                   0, 0, 0.8999999999999999}, {-0.6300367553350505, 
+                   0.32101976096010315`, 
+                   1.6071067811865474`}, {-0.30901699437494734`, 
+                   0.9510565162951536, 
+                   0.8999999999999999}, {-0.6300367553350505, 
+                   0.32101976096010315`, 
+                   1.6071067811865474`}, {-1.260073510670101, 
+                   0.6420395219202063, 
+                   0.8999999999999999}, {-0.6300367553350505, 
+                   0.32101976096010315`, 
+                   1.6071067811865474`}, {-0.9510565162951536, \
+-0.30901699437494734`, 0.8999999999999999}, {0, 0, 0.8999999999999999}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 32->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 0.9299999999999999}, {-0.36812455268467775`, 
+                   0.9297764858882515, 
+                   0.9299999999999999}, {-1.2979010385729293`, 
+                   0.5616519332035737, 
+                   0.9299999999999999}, {-0.9297764858882515, \
+-0.36812455268467775`, 0.9299999999999999}, {
+                   0, 0, 0.9299999999999999}, {-0.6489505192864646, 
+                   0.2808259666017868, 
+                   1.6371067811865476`}, {-0.36812455268467775`, 
+                   0.9297764858882515, 
+                   0.9299999999999999}, {-0.6489505192864646, 
+                   0.2808259666017868, 
+                   1.6371067811865476`}, {-1.2979010385729293`, 
+                   0.5616519332035737, 
+                   0.9299999999999999}, {-0.6489505192864646, 
+                   0.2808259666017868, 
+                   1.6371067811865476`}, {-0.9297764858882515, \
+-0.36812455268467775`, 0.9299999999999999}, {0, 0, 0.9299999999999999}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 33->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.96}, {-0.4257792915650727, 
+                   0.9048270524660195, 0.96}, {-1.3306063440310922`, 
+                   0.47904776090094675`, 
+                   0.96}, {-0.9048270524660195, -0.4257792915650727, 0.96}, {
+                   0, 0, 0.96}, {-0.6653031720155461, 0.23952388045047338`, 
+                   1.6671067811865474`}, {-0.4257792915650727, 
+                   0.9048270524660195, 0.96}, {-0.6653031720155461, 
+                   0.23952388045047338`, 
+                   1.6671067811865474`}, {-1.3306063440310922`, 
+                   0.47904776090094675`, 0.96}, {-0.6653031720155461, 
+                   0.23952388045047338`, 
+                   1.6671067811865474`}, {-0.9048270524660195, \
+-0.4257792915650727, 0.96}, {0, 0, 0.96}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 34->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.99}, {-0.48175367410171543`, 
+                   0.8763066800438635, 0.99}, {-1.358060354145579, 
+                   0.39455300594214804`, 
+                   0.99}, {-0.8763066800438635, -0.48175367410171543`, 
+                   0.99}, {0, 0, 0.99}, {-0.6790301770727895, 
+                   0.19727650297107402`, 
+                   1.6971067811865477`}, {-0.48175367410171543`, 
+                   0.8763066800438635, 0.99}, {-0.6790301770727895, 
+                   0.19727650297107402`, 
+                   1.6971067811865477`}, {-1.358060354145579, 
+                   0.39455300594214804`, 0.99}, {-0.6790301770727895, 
+                   0.19727650297107402`, 
+                   1.6971067811865477`}, {-0.8763066800438635, \
+-0.48175367410171543`, 0.99}, {0, 0, 0.99}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 35->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.02}, {-0.5358267949789969, 
+                   0.844327925502015, 1.02}, {-1.3801547204810118`, 
+                   0.3085011305230181, 
+                   1.02}, {-0.844327925502015, -0.5358267949789969, 1.02}, {
+                   0, 0, 1.02}, {-0.6900773602405059, 0.15425056526150904`, 
+                   1.7271067811865475`}, {-0.5358267949789969, 
+                   0.844327925502015, 1.02}, {-0.6900773602405059, 
+                   0.15425056526150904`, 
+                   1.7271067811865475`}, {-1.3801547204810118`, 
+                   0.3085011305230181, 1.02}, {-0.6900773602405059, 
+                   0.15425056526150904`, 
+                   1.7271067811865475`}, {-0.844327925502015, \
+-0.5358267949789969, 1.02}, {0, 0, 1.02}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 36->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.05}, {-0.5877852522924734, 
+                   0.8090169943749472, 1.05}, {-1.3968022466674206`, 
+                   0.22123174208247387`, 
+                   1.05}, {-0.8090169943749472, -0.5877852522924734, 1.05}, {
+                   0, 0, 1.05}, {-0.6984011233337103, 0.11061587104123694`, 
+                   1.7571067811865477`}, {-0.5877852522924734, 
+                   0.8090169943749472, 1.05}, {-0.6984011233337103, 
+                   0.11061587104123694`, 
+                   1.7571067811865477`}, {-1.3968022466674206`, 
+                   0.22123174208247387`, 1.05}, {-0.6984011233337103, 
+                   0.11061587104123694`, 
+                   1.7571067811865477`}, {-0.8090169943749472, \
+-0.5877852522924734, 1.05}, {0, 0, 1.05}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 37->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.08}, {-0.6374239897486897, 
+                   0.7705132427757893, 1.08}, {-1.407937232524479, 
+                   0.1330892530270995, 
+                   1.08}, {-0.7705132427757893, -0.6374239897486897, 1.08}, {
+                   0, 0, 1.08}, {-0.7039686162622395, 0.06654462651354975, 
+                   1.7871067811865475`}, {-0.6374239897486897, 
+                   0.7705132427757893, 1.08}, {-0.7039686162622395, 
+                   0.06654462651354975, 
+                   1.7871067811865475`}, {-1.407937232524479, 
+                   0.1330892530270995, 1.08}, {-0.7039686162622395, 
+                   0.06654462651354975, 
+                   1.7871067811865475`}, {-0.7705132427757893, \
+-0.6374239897486897, 1.08}, {0, 0, 1.08}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 38->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.1099999999999999`}, {-0.6845471059286884,
+                    0.7289686274214118, 
+                   1.1099999999999999`}, {-1.4135157333501, 
+                   0.04442152149272338, 
+                   1.1099999999999999`}, {-0.7289686274214118, \
+-0.6845471059286884, 1.1099999999999999`}, {
+                   0, 0, 1.1099999999999999`}, {-0.70675786667505, 
+                   0.02221076074636169, 
+                   1.8171067811865473`}, {-0.6845471059286884, 
+                   0.7289686274214118, 
+                   1.1099999999999999`}, {-0.70675786667505, 
+                   0.02221076074636169, 
+                   1.8171067811865473`}, {-1.4135157333501, 
+                   0.04442152149272338, 
+                   1.1099999999999999`}, {-0.70675786667505, 
+                   0.02221076074636169, 
+                   1.8171067811865473`}, {-0.7289686274214118, \
+-0.6845471059286884, 1.1099999999999999`}, {0, 0, 1.1099999999999999`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 39->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.1400000000000001`}, {-0.7289686274214117,
+                    0.6845471059286885, 
+                   1.1400000000000001`}, {-1.4135157333501, \
+-0.04442152149272316, 
+                   1.1400000000000001`}, {-0.6845471059286885, \
+-0.7289686274214117, 1.1400000000000001`}, {
+                   0, 0, 1.1400000000000001`}, {-0.70675786667505, \
+-0.02221076074636158, 1.8471067811865476`}, {-0.7289686274214117, 
+                   0.6845471059286885, 
+                   1.1400000000000001`}, {-0.70675786667505, \
+-0.02221076074636158, 
+                   1.8471067811865476`}, {-1.4135157333501, \
+-0.04442152149272316, 
+                   1.1400000000000001`}, {-0.70675786667505, \
+-0.02221076074636158, 
+                   1.8471067811865476`}, {-0.6845471059286885, \
+-0.7289686274214117, 1.1400000000000001`}, {0, 0, 1.1400000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 40->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.17}, {-0.7705132427757894, 
+                   0.6374239897486895, 
+                   1.17}, {-1.4079372325244788`, -0.13308925302709984`, 
+                   1.17}, {-0.6374239897486895, -0.7705132427757894, 1.17}, {
+                   0, 0, 1.17}, {-0.7039686162622394, -0.06654462651354992, 
+                   1.8771067811865474`}, {-0.7705132427757894, 
+                   0.6374239897486895, 
+                   1.17}, {-0.7039686162622394, -0.06654462651354992, 
+                   1.8771067811865474`}, {-1.4079372325244788`, \
+-0.13308925302709984`, 1.17}, {-0.7039686162622394, -0.06654462651354992, 
+                   1.8771067811865474`}, {-0.6374239897486895, \
+-0.7705132427757894, 1.17}, {0, 0, 1.17}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 41->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.2000000000000002`}, {-0.8090169943749473,
+                    0.5877852522924732, 
+                   1.2000000000000002`}, {-1.3968022466674206`, \
+-0.2212317420824741, 
+                   1.2000000000000002`}, {-0.5877852522924732, \
+-0.8090169943749473, 1.2000000000000002`}, {
+                   0, 0, 1.2000000000000002`}, {-0.6984011233337103, \
+-0.11061587104123705`, 1.9071067811865476`}, {-0.8090169943749473, 
+                   0.5877852522924732, 
+                   1.2000000000000002`}, {-0.6984011233337103, \
+-0.11061587104123705`, 
+                   1.9071067811865476`}, {-1.3968022466674206`, \
+-0.2212317420824741, 
+                   1.2000000000000002`}, {-0.6984011233337103, \
+-0.11061587104123705`, 
+                   1.9071067811865476`}, {-0.5877852522924732, \
+-0.8090169943749473, 1.2000000000000002`}, {0, 0, 1.2000000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 42->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.23}, {-0.8443279255020153, 
+                   0.5358267949789962, 
+                   1.23}, {-1.3801547204810114`, -0.3085011305230191, 
+                   1.23}, {-0.5358267949789962, -0.8443279255020153, 1.23}, {
+                   0, 0, 1.23}, {-0.6900773602405057, -0.15425056526150954`, 
+                   1.9371067811865474`}, {-0.8443279255020153, 
+                   0.5358267949789962, 
+                   1.23}, {-0.6900773602405057, -0.15425056526150954`, 
+                   1.9371067811865474`}, {-1.3801547204810114`, \
+-0.3085011305230191, 1.23}, {-0.6900773602405057, -0.15425056526150954`, 
+                   1.9371067811865474`}, {-0.5358267949789962, \
+-0.8443279255020153, 1.23}, {0, 0, 1.23}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 43->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.26}, {-0.8763066800438635, 
+                   0.4817536741017156, 
+                   1.26}, {-1.3580603541455791`, -0.39455300594214787`, 
+                   1.26}, {-0.4817536741017156, -0.8763066800438635, 1.26}, {
+                   0, 0, 1.26}, {-0.6790301770727896, -0.19727650297107394`, 
+                   1.9671067811865477`}, {-0.8763066800438635, 
+                   0.4817536741017156, 
+                   1.26}, {-0.6790301770727896, -0.19727650297107394`, 
+                   1.9671067811865477`}, {-1.3580603541455791`, \
+-0.39455300594214787`, 1.26}, {-0.6790301770727896, -0.19727650297107394`, 
+                   1.9671067811865477`}, {-0.4817536741017156, \
+-0.8763066800438635, 1.26}, {0, 0, 1.26}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 44->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.29}, {-0.9048270524660196, 
+                   0.4257792915650725, 
+                   1.29}, {-1.330606344031092, -0.4790477609009471, 
+                   1.29}, {-0.4257792915650725, -0.9048270524660196, 1.29}, {
+                   0, 0, 1.29}, {-0.665303172015546, -0.23952388045047354`, 
+                   1.9971067811865475`}, {-0.9048270524660196, 
+                   0.4257792915650725, 
+                   1.29}, {-0.665303172015546, -0.23952388045047354`, 
+                   1.9971067811865475`}, {-1.330606344031092, \
+-0.4790477609009471, 1.29}, {-0.665303172015546, -0.23952388045047354`, 
+                   1.9971067811865475`}, {-0.4257792915650725, \
+-0.9048270524660196, 1.29}, {0, 0, 1.29}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 45->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.32}, {-0.9297764858882515, 
+                   0.36812455268467775`, 
+                   1.32}, {-1.2979010385729293`, -0.5616519332035737, 
+                   1.32}, {-0.36812455268467775`, -0.9297764858882515, 
+                   1.32}, {
+                   0, 0, 1.32}, {-0.6489505192864646, -0.2808259666017868, 
+                   2.0271067811865477`}, {-0.9297764858882515, 
+                   0.36812455268467775`, 
+                   1.32}, {-0.6489505192864646, -0.2808259666017868, 
+                   2.0271067811865477`}, {-1.2979010385729293`, \
+-0.5616519332035737, 1.32}, {-0.6489505192864646, -0.2808259666017868, 
+                   2.0271067811865477`}, {-0.36812455268467775`, \
+-0.9297764858882515, 1.32}, {0, 0, 1.32}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 46->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.35}, {-0.9510565162951535, 
+                   0.3090169943749475, 
+                   1.35}, {-1.260073510670101, -0.642039521920206, 
+                   1.35}, {-0.3090169943749475, -0.9510565162951535, 1.35}, {
+                   0, 0, 1.35}, {-0.6300367553350505, -0.321019760960103, 
+                   2.0571067811865476`}, {-0.9510565162951535, 
+                   0.3090169943749475, 
+                   1.35}, {-0.6300367553350505, -0.321019760960103, 
+                   2.0571067811865476`}, {-1.260073510670101, \
+-0.642039521920206, 1.35}, {-0.6300367553350505, -0.321019760960103, 
+                   2.0571067811865476`}, {-0.3090169943749475, \
+-0.9510565162951535, 1.35}, {0, 0, 1.35}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 47->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.3800000000000001`}, {-0.9685831611286311,
+                    0.24868988716485482`, 
+                   1.3800000000000001`}, {-1.217273048293486, \
+-0.7198932739637762, 
+                   1.3800000000000001`}, {-0.24868988716485482`, \
+-0.9685831611286311, 1.3800000000000001`}, {
+                   0, 0, 1.3800000000000001`}, {-0.608636524146743, \
+-0.3599466369818881, 2.087106781186548}, {-0.9685831611286311, 
+                   0.24868988716485482`, 
+                   1.3800000000000001`}, {-0.608636524146743, \
+-0.3599466369818881, 
+                   2.087106781186548}, {-1.217273048293486, \
+-0.7198932739637762, 
+                   1.3800000000000001`}, {-0.608636524146743, \
+-0.3599466369818881, 
+                   2.087106781186548}, {-0.24868988716485482`, \
+-0.9685831611286311, 1.3800000000000001`}, {0, 0, 1.3800000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 48->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.4100000000000001`}, {-0.9822872507286887,
+                    0.18738131458572457`, 
+                   1.4100000000000001`}, {-1.1696685653144132`, \
+-0.7949059361429641, 
+                   1.4100000000000001`}, {-0.18738131458572457`, \
+-0.9822872507286887, 1.4100000000000001`}, {
+                   0, 0, 1.4100000000000001`}, {-0.5848342826572066, \
+-0.39745296807148206`, 2.1171067811865476`}, {-0.9822872507286887, 
+                   0.18738131458572457`, 
+                   1.4100000000000001`}, {-0.5848342826572066, \
+-0.39745296807148206`, 
+                   2.1171067811865476`}, {-1.1696685653144132`, \
+-0.7949059361429641, 
+                   1.4100000000000001`}, {-0.5848342826572066, \
+-0.39745296807148206`, 
+                   2.1171067811865476`}, {-0.18738131458572457`, \
+-0.9822872507286887, 1.4100000000000001`}, {0, 0, 1.4100000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 49->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.44}, {-0.9921147013144778, 
+                   0.12533323356430454`, 
+                   1.44}, {-1.1174479348787822`, -0.8667814677501733, 
+                   1.44}, {-0.12533323356430454`, -0.9921147013144778, 
+                   1.44}, {
+                   0, 0, 1.44}, {-0.5587239674393911, -0.43339073387508664`, 
+                   2.1471067811865474`}, {-0.9921147013144778, 
+                   0.12533323356430454`, 
+                   1.44}, {-0.5587239674393911, -0.43339073387508664`, 
+                   2.1471067811865474`}, {-1.1174479348787822`, \
+-0.8667814677501733, 1.44}, {-0.5587239674393911, -0.43339073387508664`, 
+                   2.1471067811865474`}, {-0.12533323356430454`, \
+-0.9921147013144778, 1.44}, {0, 0, 1.44}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 50->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.47}, {-0.9980267284282716, 
+                   0.06279051952931314, 
+                   1.47}, {-1.0608172479575848`, -0.9352362088989584, 
+                   1.47}, {-0.06279051952931314, -0.9980267284282716, 1.47}, {
+                   0, 0, 1.47}, {-0.5304086239787924, -0.4676181044494792, 
+                   2.1771067811865477`}, {-0.9980267284282716, 
+                   0.06279051952931314, 
+                   1.47}, {-0.5304086239787924, -0.4676181044494792, 
+                   2.1771067811865477`}, {-1.0608172479575848`, \
+-0.9352362088989584, 1.47}, {-0.5304086239787924, -0.4676181044494792, 
+                   2.1771067811865477`}, {-0.06279051952931314, \
+-0.9980267284282716, 1.47}, {0, 0, 1.47}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 51->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.5}, {-1., 1.2246467991473532`*^-16, 
+                   1.5}, {-1.0000000000000002`, -0.9999999999999999, 
+                   1.5}, {-1.2246467991473532`*^-16, -1., 1.5}, {
+                   0, 0, 1.5}, {-0.5000000000000001, -0.49999999999999994`, 
+                   2.2071067811865475`}, {-1., 1.2246467991473532`*^-16, 
+                   1.5}, {-0.5000000000000001, -0.49999999999999994`, 
+                   2.2071067811865475`}, {-1.0000000000000002`, \
+-0.9999999999999999, 1.5}, {-0.5000000000000001, -0.49999999999999994`, 
+                   2.2071067811865475`}, {-1.2246467991473532`*^-16, -1., 
+                   1.5}, {0, 0, 1.5}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 52->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.53}, {-0.9980267284282716, -0.06279051952931335, 
+                   1.53}, {-0.9352362088989582, -1.0608172479575848`, 1.53}, {
+                   0.06279051952931335, -0.9980267284282716, 1.53}, {
+                   0, 0, 1.53}, {-0.4676181044494791, -0.5304086239787924, 
+                   2.2371067811865477`}, {-0.9980267284282716, \
+-0.06279051952931335, 1.53}, {-0.4676181044494791, -0.5304086239787924, 
+                   2.2371067811865477`}, {-0.9352362088989582, \
+-1.0608172479575848`, 1.53}, {-0.4676181044494791, -0.5304086239787924, 
+                   2.2371067811865477`}, {
+                   0.06279051952931335, -0.9980267284282716, 1.53}, {
+                   0, 0, 1.53}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 53->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.56}, {-0.9921147013144779, -0.12533323356430429`, 
+                   1.56}, {-0.8667814677501736, -1.1174479348787822`, 1.56}, {
+                   0.12533323356430429`, -0.9921147013144779, 1.56}, {
+                   0, 0, 1.56}, {-0.4333907338750868, -0.5587239674393911, 
+                   2.2671067811865475`}, {-0.9921147013144779, \
+-0.12533323356430429`, 1.56}, {-0.4333907338750868, -0.5587239674393911, 
+                   2.2671067811865475`}, {-0.8667814677501736, \
+-1.1174479348787822`, 1.56}, {-0.4333907338750868, -0.5587239674393911, 
+                   2.2671067811865475`}, {
+                   0.12533323356430429`, -0.9921147013144779, 1.56}, {
+                   0, 0, 1.56}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 54->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.59}, {-0.9822872507286886, -0.18738131458572477`, 
+                   1.59}, {-0.7949059361429638, -1.1696685653144134`, 1.59}, {
+                   0.18738131458572477`, -0.9822872507286886, 1.59}, {
+                   0, 0, 1.59}, {-0.3974529680714819, -0.5848342826572067, 
+                   2.2971067811865478`}, {-0.9822872507286886, \
+-0.18738131458572477`, 1.59}, {-0.3974529680714819, -0.5848342826572067, 
+                   2.2971067811865478`}, {-0.7949059361429638, \
+-1.1696685653144134`, 1.59}, {-0.3974529680714819, -0.5848342826572067, 
+                   2.2971067811865478`}, {
+                   0.18738131458572477`, -0.9822872507286886, 1.59}, {
+                   0, 0, 1.59}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 55->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.62}, {-0.9685831611286311, -0.24868988716485502`, 
+                   1.62}, {-0.719893273963776, -1.2172730482934861`, 1.62}, {
+                   0.24868988716485502`, -0.9685831611286311, 1.62}, {
+                   0, 0, 1.62}, {-0.359946636981888, -0.6086365241467431, 
+                   2.3271067811865476`}, {-0.9685831611286311, \
+-0.24868988716485502`, 1.62}, {-0.359946636981888, -0.6086365241467431, 
+                   2.3271067811865476`}, {-0.719893273963776, \
+-1.2172730482934861`, 1.62}, {-0.359946636981888, -0.6086365241467431, 
+                   2.3271067811865476`}, {
+                   0.24868988716485502`, -0.9685831611286311, 1.62}, {
+                   0, 0, 1.62}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 56->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.6500000000000001`}, {-0.9510565162951535, \
+-0.30901699437494773`, 
+                   1.6500000000000001`}, {-0.6420395219202057, \
+-1.2600735106701013`, 1.6500000000000001`}, {
+                   0.30901699437494773`, -0.9510565162951535, 
+                   1.6500000000000001`}, {
+                   0, 0, 1.6500000000000001`}, {-0.3210197609601029, \
+-0.6300367553350507, 
+                   2.357106781186548}, {-0.9510565162951535, \
+-0.30901699437494773`, 
+                   1.6500000000000001`}, {-0.3210197609601029, \
+-0.6300367553350507, 
+                   2.357106781186548}, {-0.6420395219202057, \
+-1.2600735106701013`, 
+                   1.6500000000000001`}, {-0.3210197609601029, \
+-0.6300367553350507, 2.357106781186548}, {
+                   0.30901699437494773`, -0.9510565162951535, 
+                   1.6500000000000001`}, {0, 0, 1.6500000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 57->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.6800000000000002`}, {-0.9297764858882512, \
+-0.3681245526846783, 
+                   1.6800000000000002`}, {-0.561651933203573, \
+-1.2979010385729295`, 1.6800000000000002`}, {
+                   0.3681245526846783, -0.9297764858882512, 
+                   1.6800000000000002`}, {
+                   0, 0, 1.6800000000000002`}, {-0.2808259666017865, \
+-0.6489505192864647, 
+                   2.3871067811865476`}, {-0.9297764858882512, \
+-0.3681245526846783, 
+                   1.6800000000000002`}, {-0.2808259666017865, \
+-0.6489505192864647, 
+                   2.3871067811865476`}, {-0.561651933203573, \
+-1.2979010385729295`, 
+                   1.6800000000000002`}, {-0.2808259666017865, \
+-0.6489505192864647, 2.3871067811865476`}, {
+                   0.3681245526846783, -0.9297764858882512, 
+                   1.6800000000000002`}, {0, 0, 1.6800000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 58->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.7100000000000002`}, {-0.9048270524660195, \
+-0.42577929156507266`, 
+                   1.7100000000000002`}, {-0.4790477609009468, \
+-1.330606344031092, 1.7100000000000002`}, {
+                   0.42577929156507266`, -0.9048270524660195, 
+                   1.7100000000000002`}, {
+                   0, 0, 1.7100000000000002`}, {-0.2395238804504734, \
+-0.665303172015546, 
+                   2.417106781186548}, {-0.9048270524660195, \
+-0.42577929156507266`, 
+                   1.7100000000000002`}, {-0.2395238804504734, \
+-0.665303172015546, 
+                   2.417106781186548}, {-0.4790477609009468, \
+-1.330606344031092, 
+                   1.7100000000000002`}, {-0.2395238804504734, \
+-0.665303172015546, 2.417106781186548}, {
+                   0.42577929156507266`, -0.9048270524660195, 
+                   1.7100000000000002`}, {0, 0, 1.7100000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 59->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.7399999999999998`}, {-0.8763066800438637, \
+-0.481753674101715, 
+                   1.7399999999999998`}, {-0.3945530059421487, \
+-1.3580603541455787`, 1.7399999999999998`}, {
+                   0.481753674101715, -0.8763066800438637, 
+                   1.7399999999999998`}, {
+                   0, 0, 1.7399999999999998`}, {-0.19727650297107435`, \
+-0.6790301770727893, 
+                   2.4471067811865472`}, {-0.8763066800438637, \
+-0.481753674101715, 
+                   1.7399999999999998`}, {-0.19727650297107435`, \
+-0.6790301770727893, 
+                   2.4471067811865472`}, {-0.3945530059421487, \
+-1.3580603541455787`, 
+                   1.7399999999999998`}, {-0.19727650297107435`, \
+-0.6790301770727893, 2.4471067811865472`}, {
+                   0.481753674101715, -0.8763066800438637, 
+                   1.7399999999999998`}, {0, 0, 1.7399999999999998`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 60->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.77}, {-0.8443279255020154, -0.535826794978996, 
+                   1.77}, {-0.3085011305230194, -1.3801547204810114`, 1.77}, {
+                   0.535826794978996, -0.8443279255020154, 1.77}, {
+                   0, 0, 1.77}, {-0.1542505652615097, -0.6900773602405057, 
+                   2.4771067811865475`}, {-0.8443279255020154, \
+-0.535826794978996, 1.77}, {-0.1542505652615097, -0.6900773602405057, 
+                   2.4771067811865475`}, {-0.3085011305230194, \
+-1.3801547204810114`, 1.77}, {-0.1542505652615097, -0.6900773602405057, 
+                   2.4771067811865475`}, {
+                   0.535826794978996, -0.8443279255020154, 1.77}, {
+                   0, 0, 1.77}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 61->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.7999999999999998`}, {-0.8090169943749475, \
+-0.587785252292473, 
+                   1.7999999999999998`}, {-0.22123174208247443`, \
+-1.3968022466674204`, 1.7999999999999998`}, {
+                   0.587785252292473, -0.8090169943749475, 
+                   1.7999999999999998`}, {
+                   0, 0, 1.7999999999999998`}, {-0.11061587104123721`, \
+-0.6984011233337102, 
+                   2.5071067811865473`}, {-0.8090169943749475, \
+-0.587785252292473, 
+                   1.7999999999999998`}, {-0.11061587104123721`, \
+-0.6984011233337102, 
+                   2.5071067811865473`}, {-0.22123174208247443`, \
+-1.3968022466674204`, 
+                   1.7999999999999998`}, {-0.11061587104123721`, \
+-0.6984011233337102, 2.5071067811865473`}, {
+                   0.587785252292473, -0.8090169943749475, 
+                   1.7999999999999998`}, {0, 0, 1.7999999999999998`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 62->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.83}, {-0.7705132427757893, -0.6374239897486896, 
+                   1.83}, {-0.13308925302709962`, -1.4079372325244788`, 
+                   1.83}, {0.6374239897486896, -0.7705132427757893, 1.83}, {
+                   0, 0, 1.83}, {-0.06654462651354981, -0.7039686162622394, 
+                   2.5371067811865475`}, {-0.7705132427757893, \
+-0.6374239897486896, 1.83}, {-0.06654462651354981, -0.7039686162622394, 
+                   2.5371067811865475`}, {-0.13308925302709962`, \
+-1.4079372325244788`, 1.83}, {-0.06654462651354981, -0.7039686162622394, 
+                   2.5371067811865475`}, {
+                   0.6374239897486896, -0.7705132427757893, 1.83}, {
+                   0, 0, 1.83}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 63->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.8599999999999999`}, {-0.7289686274214119, \
+-0.6845471059286884, 
+                   1.8599999999999999`}, {-0.04442152149272349, \
+-1.4135157333501003`, 1.8599999999999999`}, {
+                   0.6845471059286884, -0.7289686274214119, 
+                   1.8599999999999999`}, {
+                   0, 0, 1.8599999999999999`}, {-0.022210760746361746`, \
+-0.7067578666750501, 
+                   2.5671067811865473`}, {-0.7289686274214119, \
+-0.6845471059286884, 
+                   1.8599999999999999`}, {-0.022210760746361746`, \
+-0.7067578666750501, 
+                   2.5671067811865473`}, {-0.04442152149272349, \
+-1.4135157333501003`, 
+                   1.8599999999999999`}, {-0.022210760746361746`, \
+-0.7067578666750501, 2.5671067811865473`}, {
+                   0.6845471059286884, -0.7289686274214119, 
+                   1.8599999999999999`}, {0, 0, 1.8599999999999999`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 64->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.8900000000000001`}, {-0.6845471059286886, \
+-0.7289686274214116, 1.8900000000000001`}, {
+                   0.04442152149272294, -1.4135157333501, 
+                   1.8900000000000001`}, {
+                   0.7289686274214116, -0.6845471059286886, 
+                   1.8900000000000001`}, {0, 0, 1.8900000000000001`}, {
+                   0.02221076074636147, -0.70675786667505, 
+                   2.5971067811865476`}, {-0.6845471059286886, \
+-0.7289686274214116, 1.8900000000000001`}, {
+                   0.02221076074636147, -0.70675786667505, 
+                   2.5971067811865476`}, {
+                   0.04442152149272294, -1.4135157333501, 
+                   1.8900000000000001`}, {
+                   0.02221076074636147, -0.70675786667505, 
+                   2.5971067811865476`}, {
+                   0.7289686274214116, -0.6845471059286886, 
+                   1.8900000000000001`}, {0, 0, 1.8900000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 65->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.92}, {-0.6374239897486895, -0.7705132427757894, 
+                   1.92}, {0.13308925302709984`, -1.4079372325244788`, 
+                   1.92}, {0.7705132427757894, -0.6374239897486895, 1.92}, {
+                   0, 0, 1.92}, {0.06654462651354992, -0.7039686162622394, 
+                   2.6271067811865474`}, {-0.6374239897486895, \
+-0.7705132427757894, 1.92}, {0.06654462651354992, -0.7039686162622394, 
+                   2.6271067811865474`}, {
+                   0.13308925302709984`, -1.4079372325244788`, 1.92}, {
+                   0.06654462651354992, -0.7039686162622394, 
+                   2.6271067811865474`}, {
+                   0.7705132427757894, -0.6374239897486895, 1.92}, {
+                   0, 0, 1.92}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 66->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.9500000000000002`}, {-0.5877852522924732, \
+-0.8090169943749473, 1.9500000000000002`}, {
+                   0.2212317420824741, -1.3968022466674206`, 
+                   1.9500000000000002`}, {
+                   0.8090169943749473, -0.5877852522924732, 
+                   1.9500000000000002`}, {0, 0, 1.9500000000000002`}, {
+                   0.11061587104123705`, -0.6984011233337103, 
+                   2.6571067811865476`}, {-0.5877852522924732, \
+-0.8090169943749473, 1.9500000000000002`}, {
+                   0.11061587104123705`, -0.6984011233337103, 
+                   2.6571067811865476`}, {
+                   0.2212317420824741, -1.3968022466674206`, 
+                   1.9500000000000002`}, {
+                   0.11061587104123705`, -0.6984011233337103, 
+                   2.6571067811865476`}, {
+                   0.8090169943749473, -0.5877852522924732, 
+                   1.9500000000000002`}, {0, 0, 1.9500000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 67->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 1.98}, {-0.5358267949789963, -0.8443279255020153, 
+                   1.98}, {0.308501130523019, -1.3801547204810116`, 1.98}, {
+                   0.8443279255020153, -0.5358267949789963, 1.98}, {
+                   0, 0, 1.98}, {0.1542505652615095, -0.6900773602405058, 
+                   2.6871067811865474`}, {-0.5358267949789963, \
+-0.8443279255020153, 1.98}, {0.1542505652615095, -0.6900773602405058, 
+                   2.6871067811865474`}, {
+                   0.308501130523019, -1.3801547204810116`, 1.98}, {
+                   0.1542505652615095, -0.6900773602405058, 
+                   2.6871067811865474`}, {
+                   0.8443279255020153, -0.5358267949789963, 1.98}, {
+                   0, 0, 1.98}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 68->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.0100000000000002`}, {-0.48175367410171527`, \
+-0.8763066800438636, 2.0100000000000002`}, {
+                   0.3945530059421483, -1.358060354145579, 
+                   2.0100000000000002`}, {
+                   0.8763066800438636, -0.48175367410171527`, 
+                   2.0100000000000002`}, {0, 0, 2.0100000000000002`}, {
+                   0.19727650297107416`, -0.6790301770727895, 
+                   2.7171067811865477`}, {-0.48175367410171527`, \
+-0.8763066800438636, 2.0100000000000002`}, {
+                   0.19727650297107416`, -0.6790301770727895, 
+                   2.7171067811865477`}, {
+                   0.3945530059421483, -1.358060354145579, 
+                   2.0100000000000002`}, {
+                   0.19727650297107416`, -0.6790301770727895, 
+                   2.7171067811865477`}, {
+                   0.8763066800438636, -0.48175367410171527`, 
+                   2.0100000000000002`}, {0, 0, 2.0100000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 69->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.04}, {-0.42577929156507216`, -0.9048270524660198, 
+                   2.04}, {0.47904776090094764`, -1.330606344031092, 2.04}, {
+                   0.9048270524660198, -0.42577929156507216`, 2.04}, {
+                   0, 0, 2.04}, {0.23952388045047382`, -0.665303172015546, 
+                   2.7471067811865475`}, {-0.42577929156507216`, \
+-0.9048270524660198, 2.04}, {0.23952388045047382`, -0.665303172015546, 
+                   2.7471067811865475`}, {
+                   0.47904776090094764`, -1.330606344031092, 2.04}, {
+                   0.23952388045047382`, -0.665303172015546, 
+                   2.7471067811865475`}, {
+                   0.9048270524660198, -0.42577929156507216`, 2.04}, {
+                   0, 0, 2.04}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 70->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.0700000000000003`}, {-0.3681245526846778, \
+-0.9297764858882515, 2.0700000000000003`}, {
+                   0.5616519332035737, -1.2979010385729293`, 
+                   2.0700000000000003`}, {
+                   0.9297764858882515, -0.3681245526846778, 
+                   2.0700000000000003`}, {0, 0, 2.0700000000000003`}, {
+                   0.2808259666017868, -0.6489505192864646, 
+                   2.7771067811865477`}, {-0.3681245526846778, \
+-0.9297764858882515, 2.0700000000000003`}, {
+                   0.2808259666017868, -0.6489505192864646, 
+                   2.7771067811865477`}, {
+                   0.5616519332035737, -1.2979010385729293`, 
+                   2.0700000000000003`}, {
+                   0.2808259666017868, -0.6489505192864646, 
+                   2.7771067811865477`}, {
+                   0.9297764858882515, -0.3681245526846778, 
+                   2.0700000000000003`}, {0, 0, 2.0700000000000003`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 71->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.1}, {-0.30901699437494673`, -0.9510565162951538, 
+                   2.1}, {0.6420395219202071, -1.2600735106701004`, 2.1}, {
+                   0.9510565162951538, -0.30901699437494673`, 2.1}, {
+                   0, 0, 2.1}, {0.32101976096010354`, -0.6300367553350502, 
+                   2.8071067811865476`}, {-0.30901699437494673`, \
+-0.9510565162951538, 2.1}, {0.32101976096010354`, -0.6300367553350502, 
+                   2.8071067811865476`}, {
+                   0.6420395219202071, -1.2600735106701004`, 2.1}, {
+                   0.32101976096010354`, -0.6300367553350502, 
+                   2.8071067811865476`}, {
+                   0.9510565162951538, -0.30901699437494673`, 2.1}, {
+                   0, 0, 2.1}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 72->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.13}, {-0.2486898871648553, -0.968583161128631, 
+                   2.13}, {0.7198932739637757, -1.2172730482934861`, 2.13}, {
+                   0.968583161128631, -0.2486898871648553, 2.13}, {
+                   0, 0, 2.13}, {0.35994663698188784`, -0.6086365241467431, 
+                   2.8371067811865474`}, {-0.2486898871648553, \
+-0.968583161128631, 2.13}, {0.35994663698188784`, -0.6086365241467431, 
+                   2.8371067811865474`}, {
+                   0.7198932739637757, -1.2172730482934861`, 2.13}, {
+                   0.35994663698188784`, -0.6086365241467431, 
+                   2.8371067811865474`}, {
+                   0.968583161128631, -0.2486898871648553, 2.13}, {
+                   0, 0, 2.13}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 73->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.16}, {-0.18738131458572463`, -0.9822872507286887, 
+                   2.16}, {0.7949059361429641, -1.1696685653144134`, 2.16}, {
+                   0.9822872507286887, -0.18738131458572463`, 2.16}, {
+                   0, 0, 2.16}, {0.39745296807148206`, -0.5848342826572067, 
+                   2.8671067811865476`}, {-0.18738131458572463`, \
+-0.9822872507286887, 2.16}, {0.39745296807148206`, -0.5848342826572067, 
+                   2.8671067811865476`}, {
+                   0.7949059361429641, -1.1696685653144134`, 2.16}, {
+                   0.39745296807148206`, -0.5848342826572067, 
+                   2.8671067811865476`}, {
+                   0.9822872507286887, -0.18738131458572463`, 2.16}, {
+                   0, 0, 2.16}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 74->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.19}, {-0.12533323356430373`, -0.9921147013144779, 
+                   2.19}, {0.8667814677501742, -1.1174479348787816`, 2.19}, {
+                   0.9921147013144779, -0.12533323356430373`, 2.19}, {
+                   0, 0, 2.19}, {0.4333907338750871, -0.5587239674393908, 
+                   2.8971067811865474`}, {-0.12533323356430373`, \
+-0.9921147013144779, 2.19}, {0.4333907338750871, -0.5587239674393908, 
+                   2.8971067811865474`}, {
+                   0.8667814677501742, -1.1174479348787816`, 2.19}, {
+                   0.4333907338750871, -0.5587239674393908, 
+                   2.8971067811865474`}, {
+                   0.9921147013144779, -0.12533323356430373`, 2.19}, {
+                   0, 0, 2.19}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 75->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{
+                   0, 0, 2.2199999999999998`}, {-0.0627905195293141, \
+-0.9980267284282716, 2.2199999999999998`}, {
+                   0.9352362088989574, -1.0608172479575857`, 
+                   2.2199999999999998`}, {
+                   0.9980267284282716, -0.0627905195293141, 
+                   2.2199999999999998`}, {0, 0, 2.2199999999999998`}, {
+                   0.4676181044494787, -0.5304086239787928, 
+                   2.927106781186547}, {-0.0627905195293141, \
+-0.9980267284282716, 2.2199999999999998`}, {
+                   0.4676181044494787, -0.5304086239787928, 
+                   2.927106781186547}, {
+                   0.9352362088989574, -1.0608172479575857`, 
+                   2.2199999999999998`}, {
+                   0.4676181044494787, -0.5304086239787928, 
+                   2.927106781186547}, {
+                   0.9980267284282716, -0.0627905195293141, 
+                   2.2199999999999998`}, {0, 0, 2.2199999999999998`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 76->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.25}, {-1.8369701987210297`*^-16, -1., 
+                   2.25}, {0.9999999999999998, -1.0000000000000002`, 2.25}, {
+                   1., -1.8369701987210297`*^-16, 2.25}, {0, 0, 2.25}, {
+                   0.4999999999999999, -0.5000000000000001, 
+                   2.9571067811865475`}, {-1.8369701987210297`*^-16, -1., 
+                   2.25}, {0.4999999999999999, -0.5000000000000001, 
+                   2.9571067811865475`}, {
+                   0.9999999999999998, -1.0000000000000002`, 2.25}, {
+                   0.4999999999999999, -0.5000000000000001, 
+                   2.9571067811865475`}, {1., -1.8369701987210297`*^-16, 
+                   2.25}, {0, 0, 2.25}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 77->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.2800000000000002`}, {
+                   0.06279051952931372, -0.9980267284282716, 
+                   2.2800000000000002`}, {
+                   1.0608172479575853`, -0.9352362088989579, 
+                   2.2800000000000002`}, {0.9980267284282716, 
+                   0.06279051952931372, 2.2800000000000002`}, {
+                   0, 0, 2.2800000000000002`}, {
+                   0.5304086239787926, -0.46761810444947893`, 
+                   2.9871067811865477`}, {
+                   0.06279051952931372, -0.9980267284282716, 
+                   2.2800000000000002`}, {
+                   0.5304086239787926, -0.46761810444947893`, 
+                   2.9871067811865477`}, {
+                   1.0608172479575853`, -0.9352362088989579, 
+                   2.2800000000000002`}, {
+                   0.5304086239787926, -0.46761810444947893`, 
+                   2.9871067811865477`}, {0.9980267284282716, 
+                   0.06279051952931372, 2.2800000000000002`}, {
+                   0, 0, 2.2800000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 78->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.31}, {
+                   0.12533323356430423`, -0.9921147013144779, 2.31}, {
+                   1.117447934878782, -0.8667814677501736, 2.31}, {
+                   0.9921147013144779, 0.12533323356430423`, 2.31}, {
+                   0, 0, 2.31}, {0.558723967439391, -0.4333907338750868, 
+                   3.0171067811865475`}, {
+                   0.12533323356430423`, -0.9921147013144779, 2.31}, {
+                   0.558723967439391, -0.4333907338750868, 
+                   3.0171067811865475`}, {
+                   1.117447934878782, -0.8667814677501736, 2.31}, {
+                   0.558723967439391, -0.4333907338750868, 
+                   3.0171067811865475`}, {0.9921147013144779, 
+                   0.12533323356430423`, 2.31}, {0, 0, 2.31}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 79->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.34}, {
+                   0.18738131458572513`, -0.9822872507286886, 2.34}, {
+                   1.1696685653144137`, -0.7949059361429635, 2.34}, {
+                   0.9822872507286886, 0.18738131458572513`, 2.34}, {
+                   0, 0, 2.34}, {0.5848342826572068, -0.3974529680714817, 
+                   3.0471067811865473`}, {
+                   0.18738131458572513`, -0.9822872507286886, 2.34}, {
+                   0.5848342826572068, -0.3974529680714817, 
+                   3.0471067811865473`}, {
+                   1.1696685653144137`, -0.7949059361429635, 2.34}, {
+                   0.5848342826572068, -0.3974529680714817, 
+                   3.0471067811865473`}, {0.9822872507286886, 
+                   0.18738131458572513`, 2.34}, {0, 0, 2.34}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 80->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.37}, {
+                   0.24868988716485493`, -0.9685831611286311, 2.37}, {
+                   1.217273048293486, -0.7198932739637761, 2.37}, {
+                   0.9685831611286311, 0.24868988716485493`, 2.37}, {
+                   0, 0, 2.37}, {0.608636524146743, -0.35994663698188806`, 
+                   3.0771067811865476`}, {
+                   0.24868988716485493`, -0.9685831611286311, 2.37}, {
+                   0.608636524146743, -0.35994663698188806`, 
+                   3.0771067811865476`}, {
+                   1.217273048293486, -0.7198932739637761, 2.37}, {
+                   0.608636524146743, -0.35994663698188806`, 
+                   3.0771067811865476`}, {0.9685831611286311, 
+                   0.24868988716485493`, 2.37}, {0, 0, 2.37}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 81->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.4000000000000004`}, {
+                   0.30901699437494723`, -0.9510565162951536, 
+                   2.4000000000000004`}, {
+                   1.2600735106701009`, -0.6420395219202064, 
+                   2.4000000000000004`}, {0.9510565162951536, 
+                   0.30901699437494723`, 2.4000000000000004`}, {
+                   0, 0, 2.4000000000000004`}, {
+                   0.6300367553350504, -0.3210197609601032, 
+                   3.107106781186548}, {
+                   0.30901699437494723`, -0.9510565162951536, 
+                   2.4000000000000004`}, {
+                   0.6300367553350504, -0.3210197609601032, 
+                   3.107106781186548}, {
+                   1.2600735106701009`, -0.6420395219202064, 
+                   2.4000000000000004`}, {
+                   0.6300367553350504, -0.3210197609601032, 
+                   3.107106781186548}, {0.9510565162951536, 
+                   0.30901699437494723`, 2.4000000000000004`}, {
+                   0, 0, 2.4000000000000004`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 82->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.43}, {
+                   0.36812455268467825`, -0.9297764858882512, 2.43}, {
+                   1.2979010385729295`, -0.561651933203573, 2.43}, {
+                   0.9297764858882512, 0.36812455268467825`, 2.43}, {
+                   0, 0, 2.43}, {0.6489505192864647, -0.2808259666017865, 
+                   3.1371067811865476`}, {
+                   0.36812455268467825`, -0.9297764858882512, 2.43}, {
+                   0.6489505192864647, -0.2808259666017865, 
+                   3.1371067811865476`}, {
+                   1.2979010385729295`, -0.561651933203573, 2.43}, {
+                   0.6489505192864647, -0.2808259666017865, 
+                   3.1371067811865476`}, {0.9297764858882512, 
+                   0.36812455268467825`, 2.43}, {0, 0, 2.43}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 83->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.46}, {
+                   0.42577929156507344`, -0.9048270524660191, 2.46}, {
+                   1.3306063440310925`, -0.4790477609009457, 2.46}, {
+                   0.9048270524660191, 0.42577929156507344`, 2.46}, {
+                   0, 0, 2.46}, {0.6653031720155462, -0.23952388045047285`, 
+                   3.1671067811865474`}, {
+                   0.42577929156507344`, -0.9048270524660191, 2.46}, {
+                   0.6653031720155462, -0.23952388045047285`, 
+                   3.1671067811865474`}, {
+                   1.3306063440310925`, -0.4790477609009457, 2.46}, {
+                   0.6653031720155462, -0.23952388045047285`, 
+                   3.1671067811865474`}, {0.9048270524660191, 
+                   0.42577929156507344`, 2.46}, {0, 0, 2.46}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 84->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.49}, {
+                   0.4817536741017157, -0.8763066800438634, 2.49}, {
+                   1.3580603541455791`, -0.39455300594214765`, 2.49}, {
+                   0.8763066800438634, 0.4817536741017157, 2.49}, {
+                   0, 0, 2.49}, {0.6790301770727896, -0.19727650297107382`, 
+                   3.1971067811865477`}, {
+                   0.4817536741017157, -0.8763066800438634, 2.49}, {
+                   0.6790301770727896, -0.19727650297107382`, 
+                   3.1971067811865477`}, {
+                   1.3580603541455791`, -0.39455300594214765`, 2.49}, {
+                   0.6790301770727896, -0.19727650297107382`, 
+                   3.1971067811865477`}, {0.8763066800438634, 
+                   0.4817536741017157, 2.49}, {0, 0, 2.49}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 85->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.52}, {
+                   0.535826794978996, -0.8443279255020155, 2.52}, {
+                   1.3801547204810114`, -0.30850113052301953`, 2.52}, {
+                   0.8443279255020155, 0.535826794978996, 2.52}, {
+                   0, 0, 2.52}, {0.6900773602405057, -0.15425056526150976`, 
+                   3.2271067811865475`}, {
+                   0.535826794978996, -0.8443279255020155, 2.52}, {
+                   0.6900773602405057, -0.15425056526150976`, 
+                   3.2271067811865475`}, {
+                   1.3801547204810114`, -0.30850113052301953`, 2.52}, {
+                   0.6900773602405057, -0.15425056526150976`, 
+                   3.2271067811865475`}, {0.8443279255020155, 
+                   0.535826794978996, 2.52}, {0, 0, 2.52}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 86->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.55}, {
+                   0.5877852522924729, -0.8090169943749476, 2.55}, {
+                   1.3968022466674204`, -0.22123174208247465`, 2.55}, {
+                   0.8090169943749476, 0.5877852522924729, 2.55}, {
+                   0, 0, 2.55}, {0.6984011233337102, -0.11061587104123732`, 
+                   3.2571067811865473`}, {
+                   0.5877852522924729, -0.8090169943749476, 2.55}, {
+                   0.6984011233337102, -0.11061587104123732`, 
+                   3.2571067811865473`}, {
+                   1.3968022466674204`, -0.22123174208247465`, 2.55}, {
+                   0.6984011233337102, -0.11061587104123732`, 
+                   3.2571067811865473`}, {0.8090169943749476, 
+                   0.5877852522924729, 2.55}, {0, 0, 2.55}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 87->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.58}, {
+                   0.63742398974869, -0.770513242775789, 2.58}, {
+                   1.407937232524479, -0.13308925302709906`, 2.58}, {
+                   0.770513242775789, 0.63742398974869, 2.58}, {0, 0, 2.58}, {
+                   0.7039686162622395, -0.06654462651354953, 
+                   3.2871067811865475`}, {
+                   0.63742398974869, -0.770513242775789, 2.58}, {
+                   0.7039686162622395, -0.06654462651354953, 
+                   3.2871067811865475`}, {
+                   1.407937232524479, -0.13308925302709906`, 2.58}, {
+                   0.7039686162622395, -0.06654462651354953, 
+                   3.2871067811865475`}, {0.770513242775789, 0.63742398974869,
+                    2.58}, {0, 0, 2.58}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 88->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.61}, {
+                   0.6845471059286886, -0.7289686274214116, 2.61}, {
+                   1.4135157333501, -0.04442152149272294, 2.61}, {
+                   0.7289686274214116, 0.6845471059286886, 2.61}, {
+                   0, 0, 2.61}, {0.70675786667505, -0.02221076074636147, 
+                   3.3171067811865473`}, {
+                   0.6845471059286886, -0.7289686274214116, 2.61}, {
+                   0.70675786667505, -0.02221076074636147, 
+                   3.3171067811865473`}, {
+                   1.4135157333501, -0.04442152149272294, 2.61}, {
+                   0.70675786667505, -0.02221076074636147, 
+                   3.3171067811865473`}, {0.7289686274214116, 
+                   0.6845471059286886, 2.61}, {0, 0, 2.61}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 89->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.64}, {
+                   0.7289686274214119, -0.6845471059286883, 2.64}, {
+                   1.4135157333501, 0.044421521492723604`, 2.64}, {
+                   0.6845471059286883, 0.7289686274214119, 2.64}, {
+                   0, 0, 2.64}, {0.70675786667505, 0.022210760746361802`, 
+                   3.3471067811865476`}, {
+                   0.7289686274214119, -0.6845471059286883, 2.64}, {
+                   0.70675786667505, 0.022210760746361802`, 
+                   3.3471067811865476`}, {1.4135157333501, 
+                   0.044421521492723604`, 2.64}, {0.70675786667505, 
+                   0.022210760746361802`, 3.3471067811865476`}, {
+                   0.6845471059286883, 0.7289686274214119, 2.64}, {
+                   0, 0, 2.64}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 90->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.67}, {
+                   0.7705132427757888, -0.6374239897486903, 2.67}, {
+                   1.4079372325244792`, 0.1330892530270985, 2.67}, {
+                   0.6374239897486903, 0.7705132427757888, 2.67}, {
+                   0, 0, 2.67}, {0.7039686162622396, 0.06654462651354925, 
+                   3.3771067811865474`}, {
+                   0.7705132427757888, -0.6374239897486903, 2.67}, {
+                   0.7039686162622396, 0.06654462651354925, 
+                   3.3771067811865474`}, {1.4079372325244792`, 
+                   0.1330892530270985, 2.67}, {0.7039686162622396, 
+                   0.06654462651354925, 3.3771067811865474`}, {
+                   0.6374239897486903, 0.7705132427757888, 2.67}, {
+                   0, 0, 2.67}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 91->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.7}, {
+                   0.8090169943749473, -0.5877852522924734, 2.7}, {
+                   1.3968022466674208`, 0.22123174208247398`, 2.7}, {
+                   0.5877852522924734, 0.8090169943749473, 2.7}, {
+                   0, 0, 2.7}, {0.6984011233337104, 0.11061587104123699`, 
+                   3.4071067811865476`}, {
+                   0.8090169943749473, -0.5877852522924734, 2.7}, {
+                   0.6984011233337104, 0.11061587104123699`, 
+                   3.4071067811865476`}, {1.3968022466674208`, 
+                   0.22123174208247398`, 2.7}, {0.6984011233337104, 
+                   0.11061587104123699`, 3.4071067811865476`}, {
+                   0.5877852522924734, 0.8090169943749473, 2.7}, {
+                   0, 0, 2.7}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 92->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.73}, {
+                   0.8443279255020152, -0.5358267949789963, 2.73}, {
+                   1.3801547204810114`, 0.30850113052301886`, 2.73}, {
+                   0.5358267949789963, 0.8443279255020152, 2.73}, {
+                   0, 0, 2.73}, {0.6900773602405057, 0.15425056526150943`, 
+                   3.4371067811865474`}, {
+                   0.8443279255020152, -0.5358267949789963, 2.73}, {
+                   0.6900773602405057, 0.15425056526150943`, 
+                   3.4371067811865474`}, {1.3801547204810114`, 
+                   0.30850113052301886`, 2.73}, {0.6900773602405057, 
+                   0.15425056526150943`, 3.4371067811865474`}, {
+                   0.5358267949789963, 0.8443279255020152, 2.73}, {
+                   0, 0, 2.73}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 93->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.7600000000000002`}, {
+                   0.8763066800438636, -0.4817536741017153, 
+                   2.7600000000000002`}, {1.358060354145579, 
+                   0.39455300594214826`, 2.7600000000000002`}, {
+                   0.4817536741017153, 0.8763066800438636, 
+                   2.7600000000000002`}, {0, 0, 2.7600000000000002`}, {
+                   0.6790301770727895, 0.19727650297107413`, 
+                   3.4671067811865477`}, {
+                   0.8763066800438636, -0.4817536741017153, 
+                   2.7600000000000002`}, {0.6790301770727895, 
+                   0.19727650297107413`, 3.4671067811865477`}, {
+                   1.358060354145579, 0.39455300594214826`, 
+                   2.7600000000000002`}, {0.6790301770727895, 
+                   0.19727650297107413`, 3.4671067811865477`}, {
+                   0.4817536741017153, 0.8763066800438636, 
+                   2.7600000000000002`}, {0, 0, 2.7600000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 94->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.79}, {
+                   0.9048270524660197, -0.4257792915650722, 2.79}, {
+                   1.330606344031092, 0.4790477609009475, 2.79}, {
+                   0.4257792915650722, 0.9048270524660197, 2.79}, {
+                   0, 0, 2.79}, {0.665303172015546, 0.23952388045047374`, 
+                   3.4971067811865475`}, {
+                   0.9048270524660197, -0.4257792915650722, 2.79}, {
+                   0.665303172015546, 0.23952388045047374`, 
+                   3.4971067811865475`}, {1.330606344031092, 
+                   0.4790477609009475, 2.79}, {0.665303172015546, 
+                   0.23952388045047374`, 3.4971067811865475`}, {
+                   0.4257792915650722, 0.9048270524660197, 2.79}, {
+                   0, 0, 2.79}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 95->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.8200000000000003`}, {
+                   0.9297764858882515, -0.36812455268467786`, 
+                   2.8200000000000003`}, {1.2979010385729293`, 
+                   0.5616519332035737, 2.8200000000000003`}, {
+                   0.36812455268467786`, 0.9297764858882515, 
+                   2.8200000000000003`}, {0, 0, 2.8200000000000003`}, {
+                   0.6489505192864646, 0.2808259666017868, 
+                   3.5271067811865477`}, {
+                   0.9297764858882515, -0.36812455268467786`, 
+                   2.8200000000000003`}, {0.6489505192864646, 
+                   0.2808259666017868, 3.5271067811865477`}, {
+                   1.2979010385729293`, 0.5616519332035737, 
+                   2.8200000000000003`}, {0.6489505192864646, 
+                   0.2808259666017868, 3.5271067811865477`}, {
+                   0.36812455268467786`, 0.9297764858882515, 
+                   2.8200000000000003`}, {0, 0, 2.8200000000000003`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 96->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.85}, {
+                   0.9510565162951535, -0.3090169943749477, 2.85}, {
+                   1.260073510670101, 0.6420395219202059, 2.85}, {
+                   0.3090169943749477, 0.9510565162951535, 2.85}, {
+                   0, 0, 2.85}, {0.6300367553350505, 0.32101976096010293`, 
+                   3.5571067811865476`}, {
+                   0.9510565162951535, -0.3090169943749477, 2.85}, {
+                   0.6300367553350505, 0.32101976096010293`, 
+                   3.5571067811865476`}, {1.260073510670101, 
+                   0.6420395219202059, 2.85}, {0.6300367553350505, 
+                   0.32101976096010293`, 3.5571067811865476`}, {
+                   0.3090169943749477, 0.9510565162951535, 2.85}, {
+                   0, 0, 2.85}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 97->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.88}, {
+                   0.968583161128631, -0.24868988716485535`, 2.88}, {
+                   1.2172730482934864`, 0.7198932739637756, 2.88}, {
+                   0.24868988716485535`, 0.968583161128631, 2.88}, {
+                   0, 0, 2.88}, {0.6086365241467432, 0.3599466369818878, 
+                   3.5871067811865474`}, {
+                   0.968583161128631, -0.24868988716485535`, 2.88}, {
+                   0.6086365241467432, 0.3599466369818878, 
+                   3.5871067811865474`}, {1.2172730482934864`, 
+                   0.7198932739637756, 2.88}, {0.6086365241467432, 
+                   0.3599466369818878, 3.5871067811865474`}, {
+                   0.24868988716485535`, 0.968583161128631, 2.88}, {
+                   0, 0, 2.88}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 98->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.91}, {
+                   0.9822872507286887, -0.18738131458572468`, 2.91}, {
+                   1.1696685653144134`, 0.794905936142964, 2.91}, {
+                   0.18738131458572468`, 0.9822872507286887, 2.91}, {
+                   0, 0, 2.91}, {0.5848342826572067, 0.397452968071482, 
+                   3.6171067811865476`}, {
+                   0.9822872507286887, -0.18738131458572468`, 2.91}, {
+                   0.5848342826572067, 0.397452968071482, 
+                   3.6171067811865476`}, {1.1696685653144134`, 
+                   0.794905936142964, 2.91}, {0.5848342826572067, 
+                   0.397452968071482, 3.6171067811865476`}, {
+                   0.18738131458572468`, 0.9822872507286887, 2.91}, {
+                   0, 0, 2.91}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 99->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.94}, {
+                   0.9921147013144779, -0.1253332335643038, 2.94}, {
+                   1.1174479348787816`, 0.8667814677501741, 2.94}, {
+                   0.1253332335643038, 0.9921147013144779, 2.94}, {
+                   0, 0, 2.94}, {0.5587239674393908, 0.43339073387508703`, 
+                   3.6471067811865474`}, {
+                   0.9921147013144779, -0.1253332335643038, 2.94}, {
+                   0.5587239674393908, 0.43339073387508703`, 
+                   3.6471067811865474`}, {1.1174479348787816`, 
+                   0.8667814677501741, 2.94}, {0.5587239674393908, 
+                   0.43339073387508703`, 3.6471067811865474`}, {
+                   0.1253332335643038, 0.9921147013144779, 2.94}, {
+                   0, 0, 2.94}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 100->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.9699999999999998`}, {
+                   0.9980267284282716, -0.06279051952931415, 
+                   2.9699999999999998`}, {1.0608172479575857`, 
+                   0.9352362088989574, 2.9699999999999998`}, {
+                   0.06279051952931415, 0.9980267284282716, 
+                   2.9699999999999998`}, {0, 0, 2.9699999999999998`}, {
+                   0.5304086239787928, 0.4676181044494787, 
+                   3.677106781186547}, {
+                   0.9980267284282716, -0.06279051952931415, 
+                   2.9699999999999998`}, {0.5304086239787928, 
+                   0.4676181044494787, 3.677106781186547}, {
+                   1.0608172479575857`, 0.9352362088989574, 
+                   2.9699999999999998`}, {0.5304086239787928, 
+                   0.4676181044494787, 3.677106781186547}, {
+                   0.06279051952931415, 0.9980267284282716, 
+                   2.9699999999999998`}, {0, 0, 2.9699999999999998`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above], 101->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 3.}, {1., -2.4492935982947064`*^-16, 3.}, {
+                   1.0000000000000002`, 0.9999999999999998, 3.}, {
+                   2.4492935982947064`*^-16, 1., 3.}, {0, 0, 3.}, {
+                   0.5000000000000001, 0.4999999999999999, 
+                   3.7071067811865475`}, {1., -2.4492935982947064`*^-16, 
+                   3.}, {0.5000000000000001, 0.4999999999999999, 
+                   3.7071067811865475`}, {1.0000000000000002`, 
+                   0.9999999999999998, 3.}, {0.5000000000000001, 
+                   0.4999999999999999, 3.7071067811865475`}, {
+                   2.4492935982947064`*^-16, 1., 3.}, {0, 0, 3.}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ViewPoint->Above]}, Dynamic[$CellContext`i20$$],
+               Alignment->Automatic,
+               BaseStyle->"ListAnimateCore",
+               ImageSize->All,
+               TransitionDirection->Horizontal,
+               TransitionDuration->0.5,
+               TransitionEffect->Automatic],
+              Identity,
+              Editable->True,
+              Selectable->True],
+             ImageMargins->10],
+            Deployed->False,
+            StripOnInput->False,
+            ScriptLevel->0,
+            GraphicsBoxOptions->{PreserveImageOptions->True},
+            Graphics3DBoxOptions->{PreserveImageOptions->True}],
+           Identity,
+           Editable->False,
+           Selectable->False],
+          Alignment->{Left, Center},
+          Background->GrayLevel[1],
+          Frame->1,
+          FrameStyle->GrayLevel[0, 0.2],
+          ItemSize->Automatic,
+          StripOnInput->False]}
+       },
+       AutoDelete->False,
+       GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Top}}},
+       GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.7], {
+            Offset[0.5599999999999999]}, 
+           Offset[0.7]}, "Rows" -> {
+           Offset[0.4], {
+            Offset[0.8]}, 
+           Offset[0.4]}}],
+      DefaultBaseStyle->{},
+      FrameMargins->{{5, 5}, {5, 5}}],
+     BaselinePosition->Automatic,
+     ImageMargins->0],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "ListAnimate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.903042481907527*^9, 3.9030425381316843`*^9}, 
+   3.903042615029089*^9, 3.903042671062904*^9, {3.903042718453337*^9, 
+   3.903042782526058*^9}, 3.903042842827813*^9, 3.9030428795145836`*^9, {
+   3.9030429474438457`*^9, 3.903042970967613*^9}, 3.903043061351845*^9, {
+   3.9030430915871654`*^9, 3.9030431044579744`*^9}, 3.903043391211566*^9, 
+   3.903043513187578*^9, 3.9030435540281773`*^9, 3.9032116158976183`*^9, 
+   3.9032119804968615`*^9, {3.9032120210766587`*^9, 3.9032120343102183`*^9}, {
+   3.9032125014984465`*^9, 3.9032125102245493`*^9}, 3.903212946567173*^9, 
+   3.903213043747982*^9, 3.9032130979898543`*^9, 3.9032133853328733`*^9, 
+   3.9032134337739153`*^9, 3.903213558207923*^9},
+ CellLabel->
+  "Out[235]=",ExpressionUUID->"d5900095-cf05-4fe9-8d0a-80e606e78f25"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowToolbars->"EditBar",
+WindowSize->{1008, 669},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"12.3 para Microsoft Windows (64-bit) (May 11, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d3978a90-e7e5-40fb-a6d7-2481e4d91432"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 455, 6, 238, "Title",ExpressionUUID->"74245859-b1df-4ebc-b707-16e8e8130aac"],
+Cell[CellGroupData[{
+Cell[1060, 32, 6423, 158, 1345, "Input",ExpressionUUID->"447c33ec-9393-489e-b564-e3eeaa45fec6"],
+Cell[7486, 192, 137815, 2640, 687, "Output",ExpressionUUID->"d5900095-cf05-4fe9-8d0a-80e606e78f25"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

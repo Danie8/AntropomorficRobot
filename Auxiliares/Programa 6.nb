@@ -1,0 +1,1027 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     51543,       1019]
+NotebookOptionsPosition[     50877,        997]
+NotebookOutlinePosition[     51331,       1015]
+CellTagsIndexPosition[     51288,       1012]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Programa #6 Translaci\[OAcute]n sobre eje z", "Title",
+ CellChangeTimes->{{3.9030410226984963`*^9, 3.9030410366923885`*^9}, {
+  3.9032116467625093`*^9, 3.903211646826586*^9}, {3.903212139548807*^9, 
+  3.903212141291181*^9}, {3.9032121867854195`*^9, 3.9032121890437994`*^9}, {
+  3.903212809378371*^9, 
+  3.903212818180357*^9}},ExpressionUUID->"74245859-b1df-4ebc-b707-\
+16e8e8130aac"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Creaci\[OAcute]n", " ", "del", " ", "tetraedro"}], "  ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "V\[EAcute]rtices", " ", "en", " ", "coordenadas", " ", 
+    "homog\[EAcute]neas"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"P1h", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P2h", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P3h", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P4h", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0", ",", "1"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P5h", "=", 
+     RowBox[{"{", 
+      RowBox[{"0.5", ",", "0.5", ",", 
+       SqrtBox["0.5"], ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"H", "=", 
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"1", "0", "0", "0"},
+        {"0", "1", "0", "0"},
+        {"0", "0", "1", "0"}
+       }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"T01", "=", 
+     RowBox[{"(", "\[NoBreak]", GridBox[{
+        {"1", "0", "0", "0"},
+        {"0", "1", "0", "0"},
+        {"0", "0", "1", "d1"},
+        {"0", "0", "0", "1"}
+       }], "\[NoBreak]", ")"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Puntos", " ", "en", " ", "coordenadas", " ", "cartesianas"}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P1", "=", 
+     RowBox[{"H", ".", "T01", ".", "P1h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P2", "=", 
+     RowBox[{"H", ".", "T01", ".", "P2h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P3", "=", 
+     RowBox[{"H", ".", "T01", ".", "P3h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P4", "=", 
+     RowBox[{"H", ".", "T01", ".", "P4h"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"P5", "=", 
+     RowBox[{"H", ".", "T01", ".", "P5h"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tetraedro", "=", 
+     RowBox[{"Line", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "P1", ",", "P2", ",", "P3", ",", "P4", ",", "P1", ",", "P5", ",", "P2",
+         ",", "P5", ",", "P3", ",", "P5", ",", "P4", ",", "P1"}], "}"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"aspecto", "=", 
+     RowBox[{"AspectRatio", "\[Rule]", "1"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"coordenadas", "=", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rango", "=", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "}"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"eje", "=", 
+     RowBox[{"Axes", "->", "True"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"imagen1", "=", 
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Black", ",", "Thick", ",", "tetraedro"}], "}"}], ",", "eje", 
+       ",", "rango", ",", "coordenadas", ",", "aspecto"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"tabla1", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{"imagen1", ",", 
+       RowBox[{"{", 
+        RowBox[{"d1", ",", "0", ",", "3", ",", ".1"}], "}"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"ListAnimate", "[", "tabla1", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.9030410479221077`*^9, 3.903041051628476*^9}, {
+   3.9030412565323906`*^9, 3.9030412698462534`*^9}, {3.903041742631441*^9, 
+   3.903042039561457*^9}, {3.9030422244261265`*^9, 3.9030423307325087`*^9}, {
+   3.903042365504936*^9, 3.9030424271837177`*^9}, {3.903042475837924*^9, 
+   3.903042535615839*^9}, {3.903042607669878*^9, 3.903042626109523*^9}, {
+   3.903042657759225*^9, 3.9030426666910477`*^9}, {3.9030427049195123`*^9, 
+   3.9030427790165405`*^9}, {3.9030428377330427`*^9, 3.903042840804344*^9}, {
+   3.9030428744095464`*^9, 3.903043004070017*^9}, {3.9030430421701465`*^9, 
+   3.903043102862544*^9}, 3.9030431684876523`*^9, {3.903043263711548*^9, 
+   3.90304338604285*^9}, {3.903043464657302*^9, 3.903043510135577*^9}, {
+   3.903043542277577*^9, 3.9030435491979733`*^9}, {3.9032116121268516`*^9, 
+   3.90321161309968*^9}, {3.903211698965602*^9, 3.9032117697268505`*^9}, {
+   3.903211934335495*^9, 3.9032120333247194`*^9}, {3.9032121557082944`*^9, 
+   3.9032122854891567`*^9}, {3.903212325263736*^9, 3.903212343980914*^9}, {
+   3.903212386059983*^9, 3.9032124153674517`*^9}, {3.903212446012635*^9, 
+   3.9032124560829997`*^9}, 3.9032125054438853`*^9, {3.9032128312637153`*^9, 
+   3.9032128592438574`*^9}, {3.903212892100328*^9, 3.903212934221842*^9}, {
+   3.903213039527513*^9, 3.9032130398788843`*^9}, 3.9032130950322647`*^9},
+ CellLabel->
+  "In[150]:=",ExpressionUUID->"447c33ec-9393-489e-b564-e3eeaa45fec6"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`i14$$ = 16, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {
+    "\"min\"" :> {$CellContext`i14$$ = 1}, 
+     "\"max\"" :> {$CellContext`i14$$ = 31}}, Typeset`bookmarkMode$$ = "Menu",
+     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`i14$$], 1, ""}, 1, 31, 1}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    PaneBox[
+     PanelBox[GridBox[{
+        {
+         ItemBox[
+          ItemBox[
+           TagBox[
+            StyleBox[GridBox[{
+               {"\<\"\"\>", 
+                AnimatorBox[Dynamic[$CellContext`i14$$], {1, 31, 1},
+                 AnimationRate->Automatic,
+                 AnimationRunTime->17.52608013153076,
+                 AnimationTimeIndex->2.5260801315307617`,
+                 
+                 AppearanceElements->{
+                  "ProgressSlider", "PlayPauseButton", "FasterSlowerButtons", 
+                   "DirectionButton"},
+                 AutoAction->False,
+                 DisplayAllSteps->True]}
+              },
+              AutoDelete->False,
+              
+              GridBoxAlignment->{
+               "Columns" -> {Right, {Left}}, "Rows" -> {{Baseline}}},
+              
+              GridBoxItemSize->{
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+             "ListAnimateLabel",
+             StripOnInput->False],
+            {"ControlArea", Top}],
+           Alignment->{Automatic, Inherited},
+           StripOnInput->False],
+          Background->None,
+          StripOnInput->False]},
+        {
+         ItemBox[
+          TagBox[
+           StyleBox[
+            PaneBox[
+             TagBox[
+              PaneSelectorBox[{1->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.}, {1, 0, 0.}, {1, 1, 0.}, {0, 1, 0.}, {
+                   0, 0, 0.}, {0.5, 0.5, 0.7071067811865476}, {1, 0, 0.}, {
+                   0.5, 0.5, 0.7071067811865476}, {1, 1, 0.}, {0.5, 0.5, 
+                   0.7071067811865476}, {0, 1, 0.}, {0, 0, 0.}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}},
+                ImageCache->GraphicsData["CompressedBitmap", "\<\
+eJzNXQm0XlV1vr73vyEhYRBUZh4IQSSgDCJDID9jAAmzyCT5wxDAMIsTiDwt
+UnGsWhDFGqSiCCpKUESqcdZWRanVtraKHawdrEMdClpNc/beZ+/9nbPvzU3X
+6mr/td5w73/v9+3p7HPume7S5VdfdMGly6+++LzlM0uuWn7FRRef98KZoy6/
+at2p8Sc0zdi26372mWkG6/5f2zTxr+2bZgNOHEv/TgzX/VolP6N1P+m4edhd
+dwz9OxjJ8axcN7YmnR4fNu7zleq2qbUCnT8z637W5HNfc9cfTf+Ozwj8DB3x
+uXT8aAb4qrvneP5+Nh+X35MMYyNDelTY4yubqVVyvEoUXSPHM6W0fP1kvmbk
+7knX1vZDJR6pv5+R42E6GgwLvmNN/rX53Nha1V4/XynvmSjF+R9Eyv/KiRPo
+34nRggUL1hx33HFrV6xYkX6GW221VfOn7rql9O/U7D777JOvS/+n69L/q4bD
+IVzPlppM36fvMm66Z2b+/PljbLl1Z9bFbuLKny86DI7FCc+ZsJKszQR9N8jn
+Hj3jjDMS7pfc7UfZ7elrL3IzZben4wSfYPzth5tlSg2aufxdvj1do1bzGhwa
+a0DXzaPvxvU+ski6al0QrtNELfI5h7fY8Lw8dP/GbPF0jiy07pPOJ9XTNV9w
+MItqp6e/dNtm7GgPkz7p/2zk5vMO68AOK2/OWFmEjJUwssUB69ndQfMkthjA
+jfG5LB7Reos9qyOGtjQ8EoWO+Hc6TteTup91ePt0qLs136uqObyEozwe75ms
+chll6dp0blvSMX0zESj6GQe0J/07Jwy10n/boJKsUiD8px3+QlO89EuzYzte
+DkGSw+PtxleFMbgz35uNzCayc+qYNQ5v1w7HLEDbeTyIRY+3c+yYrPPTDJKy
+WPpM4Tmi/pSD3MlErGJxd7yX1Jsm5wcp4SH+8140O10yhqajc1d2mGYPcxPy
+muuorH3SU07lr3KkwO2Xm2erxPnMgG4OeofO/QnTvc+gchCpRJfF1iSt9jbn
+qifmBA4XmrvMkNlAzSXs/3R5FPP7BgxzA/8/BAwZichf0BEOz0Z4OrdRWzh8
+3HNAlZhEuLD2vkJy8h6HZD/XqNXWn3DuGKMiNEj/er+cR1dMR1730SKMkMM3
+wgAguz3o4208Zwkf4ulYIUYdthw3DHXLAYEY8wxXM6CYlorv/NqQWowONTy9
+V/AgA3o8aUR4i6k8RwSyzLcYUls84PCmaxuofNQWonpkY3QvoXsUztutcS/P
+B5DqNw789zEHOd7hnOcEeJug8qToRx3eEzocsdSMpKl+E3QEGVjwfsvatmX5
+EwK0TVFbku5+RvtNh6In221aYWxqvlBPC9TjBlW19E4NoDbDc3Tdaob6FUOV
+TXwy9/PwNlLmiRQrQZ75MP/5Bf2ejuLM553TzOoIXXjiPkb9GXui84GhMNVp
+dk4ZNkfvkB0+wgw/6fDOOQhFt23B56AMigk4O03k59L0d7aR59NnGE0VnSOk
+Ieot0CZ0ndBwtphMj5vpsXYoP/l4oTm2qmjPZ1TI7MIECeReZnpAhGjcI3xu
+WgsjKbdbbEMSmgNxPDddPSVkG6ScbVxfQPZy4573XcOuKgkXGaWmcXlKgAj4
+EFCu6qBMFpC2X9w2XWmUGhVP5nMQKR90lGOJccAXKUn67Gi6VbFyaQAqRBAr
+vYj4kb+1dF3ON6/7Rp6JoP34AbDebON6UCLrbWdKVeXsKvGAT/dPEQxftJFy
+1LgQdGGpobpNbcf0lyiuDihFS8iW9zCUlLncOZY0yhqnv/ycPicsc421iEjZ
+F6It6Yjuj5LrXZ5euwNzT9msSR0Xvpe1cRXZ9m6m+aZBVU9z15pxFGprPEfX
+vZ+hvsFQYWF5BdrZQ4G7Berh2o1aHGYRyj/HQlEXO3IPXGvF/iozjaJtaybU
+9MgPINKzFYf0q02fEgrSnkB9qUPH30coOrddoCO3iqXrJM7/r0UokpSTAGaU
+Oxnqsx2h9Qa+DaqS7TC06DqB4sxaNSBzS+5NfCfUEtsHln8Po/Fz53Rked8+
+dKhaEWwfBJqgPtThhDFUjW6L4Hcwx6iz/pjhP94dfFFXzhsD38ykX1GuuJ3/
+fCx2Gpn17W14RT64g6Hu7zDIbSRGQtkJBSeZ3s0A3MaKH2bexbdBBt4xcI5A
+3VurpbLcbpGiuclJpY4QC3E10vowc0eA9tQ2o/8R/7m7w+h3on0Mr3iclpGY
+uzqM/j5Uio52Rni6jm0rzK0R935EI712CSJEdOQwHpQ6tldbmEh3sXMqpyCz
+i+eEjbmm6Bm+O4BeYB7TTPFOhmZLQD2kBv+IOUFDZAE6higF6p21j1XK1QhF
+ft81cMxtDMXlsLXhxUUYc+uu6BjS8R2M9rZaMA2+B9uhoMQL1M0GVQUfp0dM
+d67DU8s+K9e8xSxf1UOfaocCZwvUH8QKut5jbHnvZlKpY29lqDcaVBVqn0UT
+09HT068oxNlSzetMy4ynlRgNrlCK3D2wOHutuYl+D0qLCyWMgvEIBmZM10Os
+QXYLX34j/Z5uC7L0JT1DJ6wvGLTmqIWBOUTrG2KHkNY8covpcyHqT1IK1KsM
+qoq4h1E5OtrD4LWs/yFDXW++qCLuEQwJDwVlXaCuixUkqb6JUCTBnoEb3spQ
+1xpU5YJvmV0U6hmB2bksNS81BatG9V+1Q4HZBerFHWb/jtlFi88zUUGCfzND
+8QNNay3zt+1oUNYFzQ1L+H4pcuL3+TZIZk4whed8kYccSh3p1qhIfzeA3yv9
+ii7m9m+zP3P4p7L8gJj7fMJ4HDfXqAX4+Rmz4l7oQjrP7U4ZDZjK0w5GQpv7
+MWbSt258rorjHwZ0e6ObXSO02U8kaVwvjHvQz91PknxbW1f/Yqwa3m5gRo0h
+rFRGp2aRa5idQFak7g3XH1RlpB/xtVCi9gkUFZcuNKI894YdLCNv637tYmxV
+6fkxy7SOiEeZMVW9Hny3qsmDFPwZNeZLacG2lqufMjrUBm78SQ0MjJM5WtY0
+NoEmWdf1OVX2+3nA9KzAfq9zTOQUjpZR9thMh9V+abbSVL9f4LfXem2o12lV
+Nh4/esUPG4+1w0N2RPgk+aPZHeP8e6ZxH+6kmiytlm3/uBlJK50suQ+Km4A1
+MWT3rNO+ZuXu07ltJSx9mSnT38fapYASJ1LwkEQcCWvNZFrJ7I/wZMbXMNSJ
+BlU5nGdJBXg0CBdlXO5SkbGc1mJBuANTD3GLTMpdKzLc1KHyFOKRAgea3loj
+cpNLZo3FjUzCm4N4ftQVXCJ4MmcpfIhxg5BYczn5VGYx4RG1viifjI1Bd8xB
+bX7hFlxzGIOGTU0C3cxAtb45yJTWhMWNSw7R8RF/37gPO3eQgyYrRxybG4em
+jEXoKNLy9xhKUkBOiqtYxZpSxiozZTJC+jGDyRAWpKqDg3NiK86eU4lJO80b
+zpK5BZGnyuTCw71QgfnNYVTpHMK3QVYDVhroUO2K4RwzMFORELmRovmKKGWY
+EmqFQ0xmvfiVDLo7mpqLKQ8ED72pczdY4zry2eMTMLYvcrWbZH67fFDGvHxT
+I/7eCzSWxMsTwGqpsNCxOQelxeiejc04WgctFm19bM4yvMRIblmO5Ge2cU2E
+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\
+\>"]], 2->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.1}, {1, 0, 0.1}, {1, 1, 0.1}, {
+                   0, 1, 0.1}, {0, 0, 0.1}, {0.5, 0.5, 0.8071067811865476}, {
+                   1, 0, 0.1}, {0.5, 0.5, 0.8071067811865476}, {1, 1, 0.1}, {
+                   0.5, 0.5, 0.8071067811865476}, {0, 1, 0.1}, {0, 0, 0.1}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 3->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.2}, {1, 0, 0.2}, {1, 1, 0.2}, {
+                   0, 1, 0.2}, {0, 0, 0.2}, {0.5, 0.5, 0.9071067811865476}, {
+                   1, 0, 0.2}, {0.5, 0.5, 0.9071067811865476}, {1, 1, 0.2}, {
+                   0.5, 0.5, 0.9071067811865476}, {0, 1, 0.2}, {0, 0, 0.2}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 4->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.30000000000000004`}, {
+                   1, 0, 0.30000000000000004`}, {
+                   1, 1, 0.30000000000000004`}, {
+                   0, 1, 0.30000000000000004`}, {
+                   0, 0, 0.30000000000000004`}, {0.5, 0.5, 
+                   1.0071067811865477`}, {1, 0, 0.30000000000000004`}, {0.5, 
+                   0.5, 1.0071067811865477`}, {1, 1, 0.30000000000000004`}, {
+                   0.5, 0.5, 1.0071067811865477`}, {
+                   0, 1, 0.30000000000000004`}, {
+                   0, 0, 0.30000000000000004`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 5->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.4}, {1, 0, 0.4}, {1, 1, 0.4}, {
+                   0, 1, 0.4}, {0, 0, 0.4}, {0.5, 0.5, 1.1071067811865476`}, {
+                   1, 0, 0.4}, {0.5, 0.5, 1.1071067811865476`}, {1, 1, 0.4}, {
+                   0.5, 0.5, 1.1071067811865476`}, {0, 1, 0.4}, {0, 0, 0.4}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 6->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.5}, {1, 0, 0.5}, {1, 1, 0.5}, {
+                   0, 1, 0.5}, {0, 0, 0.5}, {0.5, 0.5, 1.2071067811865475`}, {
+                   1, 0, 0.5}, {0.5, 0.5, 1.2071067811865475`}, {1, 1, 0.5}, {
+                   0.5, 0.5, 1.2071067811865475`}, {0, 1, 0.5}, {0, 0, 0.5}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 7->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.6000000000000001}, {
+                   1, 0, 0.6000000000000001}, {1, 1, 0.6000000000000001}, {
+                   0, 1, 0.6000000000000001}, {0, 0, 0.6000000000000001}, {
+                   0.5, 0.5, 1.3071067811865476`}, {
+                   1, 0, 0.6000000000000001}, {0.5, 0.5, 
+                   1.3071067811865476`}, {1, 1, 0.6000000000000001}, {0.5, 
+                   0.5, 1.3071067811865476`}, {0, 1, 0.6000000000000001}, {
+                   0, 0, 0.6000000000000001}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 8->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.7000000000000001}, {
+                   1, 0, 0.7000000000000001}, {1, 1, 0.7000000000000001}, {
+                   0, 1, 0.7000000000000001}, {0, 0, 0.7000000000000001}, {
+                   0.5, 0.5, 1.4071067811865476`}, {
+                   1, 0, 0.7000000000000001}, {0.5, 0.5, 
+                   1.4071067811865476`}, {1, 1, 0.7000000000000001}, {0.5, 
+                   0.5, 1.4071067811865476`}, {0, 1, 0.7000000000000001}, {
+                   0, 0, 0.7000000000000001}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 9->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.8}, {1, 0, 0.8}, {1, 1, 0.8}, {
+                   0, 1, 0.8}, {0, 0, 0.8}, {0.5, 0.5, 1.5071067811865477`}, {
+                   1, 0, 0.8}, {0.5, 0.5, 1.5071067811865477`}, {1, 1, 0.8}, {
+                   0.5, 0.5, 1.5071067811865477`}, {0, 1, 0.8}, {0, 0, 0.8}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 10->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 0.9}, {1, 0, 0.9}, {1, 1, 0.9}, {
+                   0, 1, 0.9}, {0, 0, 0.9}, {0.5, 0.5, 1.6071067811865476`}, {
+                   1, 0, 0.9}, {0.5, 0.5, 1.6071067811865476`}, {1, 1, 0.9}, {
+                   0.5, 0.5, 1.6071067811865476`}, {0, 1, 0.9}, {0, 0, 0.9}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 11->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.}, {1, 0, 1.}, {1, 1, 1.}, {0, 1, 1.}, {
+                   0, 0, 1.}, {0.5, 0.5, 1.7071067811865475`}, {1, 0, 1.}, {
+                   0.5, 0.5, 1.7071067811865475`}, {1, 1, 1.}, {0.5, 0.5, 
+                   1.7071067811865475`}, {0, 1, 1.}, {0, 0, 1.}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 12->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.1}, {1, 0, 1.1}, {1, 1, 1.1}, {
+                   0, 1, 1.1}, {0, 0, 1.1}, {0.5, 0.5, 1.8071067811865476`}, {
+                   1, 0, 1.1}, {0.5, 0.5, 1.8071067811865476`}, {1, 1, 1.1}, {
+                   0.5, 0.5, 1.8071067811865476`}, {0, 1, 1.1}, {0, 0, 1.1}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 13->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.2000000000000002`}, {
+                   1, 0, 1.2000000000000002`}, {1, 1, 1.2000000000000002`}, {
+                   0, 1, 1.2000000000000002`}, {0, 0, 1.2000000000000002`}, {
+                   0.5, 0.5, 1.9071067811865476`}, {
+                   1, 0, 1.2000000000000002`}, {0.5, 0.5, 
+                   1.9071067811865476`}, {1, 1, 1.2000000000000002`}, {0.5, 
+                   0.5, 1.9071067811865476`}, {0, 1, 1.2000000000000002`}, {
+                   0, 0, 1.2000000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 14->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.3}, {1, 0, 1.3}, {1, 1, 1.3}, {
+                   0, 1, 1.3}, {0, 0, 1.3}, {0.5, 0.5, 2.0071067811865477`}, {
+                   1, 0, 1.3}, {0.5, 0.5, 2.0071067811865477`}, {1, 1, 1.3}, {
+                   0.5, 0.5, 2.0071067811865477`}, {0, 1, 1.3}, {0, 0, 1.3}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 15->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.4000000000000001`}, {
+                   1, 0, 1.4000000000000001`}, {1, 1, 1.4000000000000001`}, {
+                   0, 1, 1.4000000000000001`}, {0, 0, 1.4000000000000001`}, {
+                   0.5, 0.5, 2.107106781186548}, {
+                   1, 0, 1.4000000000000001`}, {0.5, 0.5, 
+                   2.107106781186548}, {1, 1, 1.4000000000000001`}, {0.5, 0.5,
+                    2.107106781186548}, {0, 1, 1.4000000000000001`}, {
+                   0, 0, 1.4000000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 16->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.5}, {1, 0, 1.5}, {1, 1, 1.5}, {
+                   0, 1, 1.5}, {0, 0, 1.5}, {0.5, 0.5, 2.2071067811865475`}, {
+                   1, 0, 1.5}, {0.5, 0.5, 2.2071067811865475`}, {1, 1, 1.5}, {
+                   0.5, 0.5, 2.2071067811865475`}, {0, 1, 1.5}, {0, 0, 1.5}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 17->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.6}, {1, 0, 1.6}, {1, 1, 1.6}, {
+                   0, 1, 1.6}, {0, 0, 1.6}, {0.5, 0.5, 2.3071067811865476`}, {
+                   1, 0, 1.6}, {0.5, 0.5, 2.3071067811865476`}, {1, 1, 1.6}, {
+                   0.5, 0.5, 2.3071067811865476`}, {0, 1, 1.6}, {0, 0, 1.6}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 18->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.7000000000000002`}, {
+                   1, 0, 1.7000000000000002`}, {1, 1, 1.7000000000000002`}, {
+                   0, 1, 1.7000000000000002`}, {0, 0, 1.7000000000000002`}, {
+                   0.5, 0.5, 2.4071067811865476`}, {
+                   1, 0, 1.7000000000000002`}, {0.5, 0.5, 
+                   2.4071067811865476`}, {1, 1, 1.7000000000000002`}, {0.5, 
+                   0.5, 2.4071067811865476`}, {0, 1, 1.7000000000000002`}, {
+                   0, 0, 1.7000000000000002`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 19->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.8}, {1, 0, 1.8}, {1, 1, 1.8}, {
+                   0, 1, 1.8}, {0, 0, 1.8}, {0.5, 0.5, 2.5071067811865477`}, {
+                   1, 0, 1.8}, {0.5, 0.5, 2.5071067811865477`}, {1, 1, 1.8}, {
+                   0.5, 0.5, 2.5071067811865477`}, {0, 1, 1.8}, {0, 0, 1.8}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 20->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 1.9000000000000001`}, {
+                   1, 0, 1.9000000000000001`}, {1, 1, 1.9000000000000001`}, {
+                   0, 1, 1.9000000000000001`}, {0, 0, 1.9000000000000001`}, {
+                   0.5, 0.5, 2.607106781186548}, {
+                   1, 0, 1.9000000000000001`}, {0.5, 0.5, 
+                   2.607106781186548}, {1, 1, 1.9000000000000001`}, {0.5, 0.5,
+                    2.607106781186548}, {0, 1, 1.9000000000000001`}, {
+                   0, 0, 1.9000000000000001`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 21->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.}, {1, 0, 2.}, {1, 1, 2.}, {0, 1, 2.}, {
+                   0, 0, 2.}, {0.5, 0.5, 2.7071067811865475`}, {1, 0, 2.}, {
+                   0.5, 0.5, 2.7071067811865475`}, {1, 1, 2.}, {0.5, 0.5, 
+                   2.7071067811865475`}, {0, 1, 2.}, {0, 0, 2.}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 22->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.1}, {1, 0, 2.1}, {1, 1, 2.1}, {
+                   0, 1, 2.1}, {0, 0, 2.1}, {0.5, 0.5, 2.8071067811865476`}, {
+                   1, 0, 2.1}, {0.5, 0.5, 2.8071067811865476`}, {1, 1, 2.1}, {
+                   0.5, 0.5, 2.8071067811865476`}, {0, 1, 2.1}, {0, 0, 2.1}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 23->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.2}, {1, 0, 2.2}, {1, 1, 2.2}, {
+                   0, 1, 2.2}, {0, 0, 2.2}, {0.5, 0.5, 2.9071067811865476`}, {
+                   1, 0, 2.2}, {0.5, 0.5, 2.9071067811865476`}, {1, 1, 2.2}, {
+                   0.5, 0.5, 2.9071067811865476`}, {0, 1, 2.2}, {0, 0, 2.2}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 24->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.3000000000000003`}, {
+                   1, 0, 2.3000000000000003`}, {1, 1, 2.3000000000000003`}, {
+                   0, 1, 2.3000000000000003`}, {0, 0, 2.3000000000000003`}, {
+                   0.5, 0.5, 3.0071067811865477`}, {
+                   1, 0, 2.3000000000000003`}, {0.5, 0.5, 
+                   3.0071067811865477`}, {1, 1, 2.3000000000000003`}, {0.5, 
+                   0.5, 3.0071067811865477`}, {0, 1, 2.3000000000000003`}, {
+                   0, 0, 2.3000000000000003`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 25->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.4000000000000004`}, {
+                   1, 0, 2.4000000000000004`}, {1, 1, 2.4000000000000004`}, {
+                   0, 1, 2.4000000000000004`}, {0, 0, 2.4000000000000004`}, {
+                   0.5, 0.5, 3.107106781186548}, {
+                   1, 0, 2.4000000000000004`}, {0.5, 0.5, 
+                   3.107106781186548}, {1, 1, 2.4000000000000004`}, {0.5, 0.5,
+                    3.107106781186548}, {0, 1, 2.4000000000000004`}, {
+                   0, 0, 2.4000000000000004`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 26->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.5}, {1, 0, 2.5}, {1, 1, 2.5}, {
+                   0, 1, 2.5}, {0, 0, 2.5}, {0.5, 0.5, 3.2071067811865475`}, {
+                   1, 0, 2.5}, {0.5, 0.5, 3.2071067811865475`}, {1, 1, 2.5}, {
+                   0.5, 0.5, 3.2071067811865475`}, {0, 1, 2.5}, {0, 0, 2.5}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 27->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.6}, {1, 0, 2.6}, {1, 1, 2.6}, {
+                   0, 1, 2.6}, {0, 0, 2.6}, {0.5, 0.5, 3.3071067811865476`}, {
+                   1, 0, 2.6}, {0.5, 0.5, 3.3071067811865476`}, {1, 1, 2.6}, {
+                   0.5, 0.5, 3.3071067811865476`}, {0, 1, 2.6}, {0, 0, 2.6}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 28->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.7}, {1, 0, 2.7}, {1, 1, 2.7}, {
+                   0, 1, 2.7}, {0, 0, 2.7}, {0.5, 0.5, 3.4071067811865476`}, {
+                   1, 0, 2.7}, {0.5, 0.5, 3.4071067811865476`}, {1, 1, 2.7}, {
+                   0.5, 0.5, 3.4071067811865476`}, {0, 1, 2.7}, {0, 0, 2.7}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 29->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.8000000000000003`}, {
+                   1, 0, 2.8000000000000003`}, {1, 1, 2.8000000000000003`}, {
+                   0, 1, 2.8000000000000003`}, {0, 0, 2.8000000000000003`}, {
+                   0.5, 0.5, 3.5071067811865477`}, {
+                   1, 0, 2.8000000000000003`}, {0.5, 0.5, 
+                   3.5071067811865477`}, {1, 1, 2.8000000000000003`}, {0.5, 
+                   0.5, 3.5071067811865477`}, {0, 1, 2.8000000000000003`}, {
+                   0, 0, 2.8000000000000003`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 30->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 2.9000000000000004`}, {
+                   1, 0, 2.9000000000000004`}, {1, 1, 2.9000000000000004`}, {
+                   0, 1, 2.9000000000000004`}, {0, 0, 2.9000000000000004`}, {
+                   0.5, 0.5, 3.607106781186548}, {
+                   1, 0, 2.9000000000000004`}, {0.5, 0.5, 
+                   3.607106781186548}, {1, 1, 2.9000000000000004`}, {0.5, 0.5,
+                    3.607106781186548}, {0, 1, 2.9000000000000004`}, {
+                   0, 0, 2.9000000000000004`}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}], 31->
+               Graphics3DBox[
+                {GrayLevel[0], Thickness[Large], 
+                 Line3DBox[{{0, 0, 3.}, {1, 0, 3.}, {1, 1, 3.}, {0, 1, 3.}, {
+                   0, 0, 3.}, {0.5, 0.5, 3.7071067811865475`}, {1, 0, 3.}, {
+                   0.5, 0.5, 3.7071067811865475`}, {1, 1, 3.}, {0.5, 0.5, 
+                   3.7071067811865475`}, {0, 1, 3.}, {0, 0, 3.}}]},
+                AspectRatio->1,
+                Axes->True,
+                AxesLabel->{
+                  FormBox["\"x\"", TraditionalForm], 
+                  FormBox["\"y\"", TraditionalForm], 
+                  FormBox["\"z\"", TraditionalForm]},
+                PlotRange->{{-5, 5}, {-5, 5}, {-5, 5}}]}, 
+               Dynamic[$CellContext`i14$$],
+               Alignment->Automatic,
+               BaseStyle->"ListAnimateCore",
+               ImageSize->All,
+               TransitionDirection->Horizontal,
+               TransitionDuration->0.5,
+               TransitionEffect->Automatic],
+              Identity,
+              Editable->True,
+              Selectable->True],
+             ImageMargins->10],
+            Deployed->False,
+            StripOnInput->False,
+            ScriptLevel->0,
+            GraphicsBoxOptions->{PreserveImageOptions->True},
+            Graphics3DBoxOptions->{PreserveImageOptions->True}],
+           Identity,
+           Editable->False,
+           Selectable->False],
+          Alignment->{Left, Center},
+          Background->GrayLevel[1],
+          Frame->1,
+          FrameStyle->GrayLevel[0, 0.2],
+          ItemSize->Automatic,
+          StripOnInput->False]}
+       },
+       AutoDelete->False,
+       GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Top}}},
+       GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.7], {
+            Offset[0.5599999999999999]}, 
+           Offset[0.7]}, "Rows" -> {
+           Offset[0.4], {
+            Offset[0.8]}, 
+           Offset[0.4]}}],
+      DefaultBaseStyle->{},
+      FrameMargins->{{5, 5}, {5, 5}}],
+     BaselinePosition->Automatic,
+     ImageMargins->0],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "ListAnimate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.903042481907527*^9, 3.9030425381316843`*^9}, 
+   3.903042615029089*^9, 3.903042671062904*^9, {3.903042718453337*^9, 
+   3.903042782526058*^9}, 3.903042842827813*^9, 3.9030428795145836`*^9, {
+   3.9030429474438457`*^9, 3.903042970967613*^9}, 3.903043061351845*^9, {
+   3.9030430915871654`*^9, 3.9030431044579744`*^9}, 3.903043391211566*^9, 
+   3.903043513187578*^9, 3.9030435540281773`*^9, 3.9032116158976183`*^9, 
+   3.9032119804968615`*^9, {3.9032120210766587`*^9, 3.9032120343102183`*^9}, {
+   3.9032125014984465`*^9, 3.9032125102245493`*^9}, 3.903212946567173*^9, 
+   3.903213043747982*^9, 3.9032130979898543`*^9},
+ CellLabel->
+  "Out[169]=",ExpressionUUID->"46a30ea7-85c4-4ba1-94d3-07808b814f2c"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowToolbars->"EditBar",
+WindowSize->{1008, 669},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"12.3 para Microsoft Windows (64-bit) (May 11, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f257fd7b-2cb1-4c4a-b331-5c7e26de6137"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 389, 6, 238, "Title",ExpressionUUID->"74245859-b1df-4ebc-b707-16e8e8130aac"],
+Cell[CellGroupData[{
+Cell[994, 32, 5674, 141, 1263, "Input",ExpressionUUID->"447c33ec-9393-489e-b564-e3eeaa45fec6"],
+Cell[6671, 175, 44178, 818, 752, "Output",ExpressionUUID->"46a30ea7-85c4-4ba1-94d3-07808b814f2c"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
