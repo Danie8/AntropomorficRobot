@@ -1,5 +1,10 @@
-(*Suposición:los eslabones están hecho de MDF*)\[Rho] = 
-  500;(*densidad MDF=500[kg/m^3]*)
+(*Suposición:los eslabones están hecho de MDF*)(*densidad \
+MDF=500[kg/m^3]*)
+(*densidad ABS=1040[kg/m^3]*)
+(*Se considerará un peso 10 veces menor, pues los eslaboness serán \
+diseñados para tener el material minimo en manufactura aditiva*)
+
+\[Rho] = 1040/10;
 g = -9.81;(*Aceleración gravitatoria*)
 
 (*Datos del eslabón 1 o Cilindro*)
